@@ -4,7 +4,7 @@ html,body {
   font-weight: 300;
 }
 .hero.is-success {
-  background: #F2F6FA;
+  background: #5c1b1b;
 }
 .hero .nav, .hero.is-success .nav {
   -webkit-box-shadow: none;
@@ -12,17 +12,18 @@ html,body {
 }
 .box {
   margin-top: 5rem;
+  background: rgb(73, 21, 21);
+  border-radius: 1%;
+  border: 1px solid rgb(238, 144, 22);
 }
 .avatar {
-  margin-top: -70px;
-  padding-bottom: 20px;
+  margin-top: -0px;
+  padding-bottom: 50px;
 }
 .avatar img {
-  padding: 5px;
-  background: #fff;
-  border-radius: 50%;
-  -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
-  box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+  padding: 0px;
+  background: rgb(73, 21, 21);
+  
 }
 input {
   font-weight: 300;
@@ -35,7 +36,7 @@ p.subtitle {
 }
 
 .login-hr{
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(7, 7, 7);
 }
 
 .has-text-black{
