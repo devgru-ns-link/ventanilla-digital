@@ -5,14 +5,6 @@ html,body {
 .hero-body .container {
   max-width: 700px;
 }
-.hero-body .title {
-  color: hsl(192,17%,99%) !important;
-}
-.hero-body .subtitle {
-  color: hsl(192,17%,99%) !important;
-  padding-top: 2rem;
-  line-height: 1.5;
-}
 .features {
   padding: 5rem 0;
 }
@@ -21,11 +13,9 @@ html,body {
   border-left: none;
   border-right: none;
 }
-.card-image > .fa {
-  font-size: 8rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  color: #209cee;
+.card-image img{
+  width: 200px;
+  margin: 50px;
 }
 .card-content .content {
   font-size: 14px;
@@ -55,7 +45,7 @@ html,body {
 animation: flyintoright .4s backwards;
 background: #fff;
 box-shadow: rgba(0, 0, 0, .1) 0 1px 0;
-border-radius: 4px;
+border-radius: 40px;
 display: inline-block;
 margin: 10px;
 position: relative;
@@ -72,3 +62,9 @@ footer li:before {
   margin-left: -1.5em;
   color: #147efb;
 }
+
+.navbar-item img{
+  margin-left: 10px;
+
+}
+
