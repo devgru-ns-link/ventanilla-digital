@@ -12,32 +12,41 @@
               optio sed.
             </p>
           </div>
-          <div class="column right has-text-centered">
-            <h1 class="title is-4">Sign up today</h1>
-            <p class="description">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit
-            </p>
-            <form>
-              <div class="field">
-                <div class="control">
-                  <input
-                    class="input is-medium"
-                    type="text"
-                    placeholder="Name"
-                  />
-                </div>
-              </div>
+          <div class="column right ">
+            <div class="has-text-centered">
+              <h1 class="title is-4">Sign up today</h1>
+              <p class="description">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </p>
+            </div>
 
-              <div class="field">
-                <div class="control">
-                  <input
-                    class="input is-medium"
-                    type="email"
-                    placeholder="Email"
-                  />
-                </div>
-              </div>
-              <button class="button is-block is-primary is-fullwidth is-medium">
+            <form>
+              <b-field>
+                <b-input placeholder="No label" v-model="name"></b-input>
+              </b-field>
+
+              <b-field type="is-danger" message="This email is invalid">
+                <b-input type="email" value="john@" maxlength="30"> </b-input>
+              </b-field>
+
+              <b-field type="is-success" message="This username is available">
+                <b-input value="johnsilver" maxlength="30"></b-input>
+              </b-field>
+
+              <b-field>
+                <b-input
+                  type="password"
+                  value="iwantmytreasure"
+                  password-reveal
+                >
+                </b-input>
+              </b-field>
+
+              <b-field>
+                <b-input maxlength="200" type="textarea"></b-input>
+              </b-field>
+
+              <button class="button is-block is-primary is-fullwidth">
                 Submit
               </button>
               <br />
