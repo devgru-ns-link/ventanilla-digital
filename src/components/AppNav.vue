@@ -30,12 +30,12 @@
         <i class="material-icons">person_outline</i>
       </a>
       <div class="buttons">
-        <a class="button is-primary">
+        <router-link tag="a" to="/register" class="button is-primary">
           <strong>Sign up</strong>
-        </a>
-        <a class="button is-light">
+        </router-link>
+        <router-link tag="a" to="/login" class="button is-light"> 
           Log in
-        </a>
+        </router-link>
       </div>
     </div>
   </div>
