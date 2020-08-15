@@ -55,6 +55,7 @@ export default {
                 password: this.password
             })
             console.log(res)
+            this.$router.push("/home") //Redireccionamiento con codigo
         }
     }
 }
