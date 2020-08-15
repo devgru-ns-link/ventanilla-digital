@@ -10,13 +10,13 @@
                         <form>
                             <div class="field">
                                 <div class="control">
-                                    <input class="input is-large" type="email" placeholder="Correo" autofocus="">
+                                    <input class="input is-large" type="text" placeholder="Correo" autofocus="" v-model="enrollment">
                                 </div>
                             </div>
 
                             <div class="field">
                                 <div class="control">
-                                    <input class="input is-large" type="password" placeholder="Contraseña">
+                                    <input class="input is-large" type="password" placeholder="Contraseña" v-model="password">
                                 </div>
                             </div>
                             <div class="field">
@@ -25,7 +25,7 @@
                   Remember me
                 </label>
                             </div>
-                            <button class="button is-block is-info is-large is-fullwidth">Login <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                            <button class="button is-block is-info is-large is-fullwidth" @click="submit">Login <i class="fa fa-sign-in" aria-hidden="true"></i></button>
                         </form>
                     </div>
                     <p class="has-text-grey">
@@ -40,8 +40,23 @@
 </template>
 
 <script>
+import {login} from '@/api/users'
 export default {
-    
+    data(){
+        return {
+            enrollment: "",
+            password: ""
+        }
+    },
+    methods:{
+        async submit(){
+            const res = await login({
+                enrollment: this.enrollment,
+                password: this.password
+            })
+            console.log(res)
+        }
+    }
 }
 </script>
 
