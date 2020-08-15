@@ -5,52 +5,60 @@
         <div class="columns">
           <div class="column left is-hidden-touch">
             <h1 class="title is-1">Ventanilla Digital</h1>
-            <h2 class="subtitle colored is-4">Lorem ipsum dolor sit amet.</h2>
+            <h2 class="subtitle colored is-4">Tramites electronicos para el ITM.</h2>
             <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
-              ex deleniti aliquam tempora libero excepturi vero soluta odio
-              optio sed.
+              Esta es una plataforma para solicitar a distancia los tramites de control escolar y ayudar contra el covid.
             </p>
           </div>
           <div class="column right ">
             <div class="has-text-centered">
-              <h1 class="title is-4">Sign up today</h1>
+              <h1 class="title is-4">Registrate ahora!</h1>
               <p class="description">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+                El usuario es necesario para acceder a los tramites en linea
               </p>
             </div>
 
             <form>
-              <b-field>
-                <b-input placeholder="No label" v-model="name"></b-input>
+
+              <!-- Como hacer otra barrita
+              <b-field> 
+                <b-input type="text" placeholder="Matricula" v-model="enrollment"></b-input>
+              </b-field> 
+              -->
+
+              <b-field type="is-success" message="La matricula esta disponible">
+                <b-input type="text" placeholder="Matricula" maxlength="30" v-model="enrollment"></b-input>
               </b-field>
 
-              <b-field type="is-danger" message="This email is invalid">
-                <b-input type="email" value="john@" maxlength="30"> </b-input>
-              </b-field>
-
-              <b-field type="is-success" message="This username is available">
-                <b-input value="johnsilver" maxlength="30"></b-input>
+              <b-field type="is-danger" message="El correo es invalido">
+                <b-input type="email" placeholder="Correo" maxlength="30" v-model="email"> </b-input>
               </b-field>
 
               <b-field>
                 <b-input
                   type="password"
-                  value="iwantmytreasure"
+                  placeholder="Contraseña"
                   password-reveal
+                  v-model="password"
                 >
                 </b-input>
               </b-field>
 
               <b-field>
-                <b-input maxlength="200" type="textarea"></b-input>
+                <b-input
+                  type="password"
+                  placeholder="Confirmar contraseña"
+                  password-reveal
+                  v-model="password_confirm"
+                >
+                </b-input>
               </b-field>
 
-              <button class="button is-block is-primary is-fullwidth">
-                Submit
+              <button class="button is-block is-primary is-fullwidth" @click="signup">
+                Registrarse
               </button>
               <br />
-              <small><em>Lorem ipsum dolor sit amet consectetur.</em></small>
+              <small><em>Rellena todos los datos.</em></small>
             </form>
           </div>
         </div>
@@ -83,7 +91,7 @@
           </div>
           <div class="level-right">
             <small class="level-item" style="color: var(--textLight)">
-              &copy; Super Cool Website. All Rights Reserved.
+              &copy; Instituto Tecnologico de Merida. Todos los derechos reservados.
             </small>
           </div>
         </nav>
@@ -91,6 +99,32 @@
     </div>
   </section>
 </template>
+
+<script>
+import {register} from '@/api/users'
+export default {
+    data(){
+        return {
+            enrollment: "",
+            email: "",
+            password: "",
+            password_confirm: ""
+        }
+    },
+    methods:{
+        async signup(){
+            const res = await register({
+                enrollment: this.enrollment,
+                email: this.email,
+                password: this.password,
+                password_confirm: this.password_confirm
+            })
+            console.log(res)
+            this.$router.push("/home") //Redireccionamiento con codigo
+        }
+    }
+}
+</script>
 
 <style>
 :root {
