@@ -9,9 +9,9 @@
         <div class="container has-text-centered">
           <div class="columns is-vcentered">
             <div class="column is-5">
-              <figure class="image is-4by3">
+              <figure class="is-4by3">
                 <img
-                  src="https://www.becas-santander.com/assets/images/becas-desktop.svg"
+                  src="../../img/laptop.svg"
                   alt="Description"
                 />
               </figure>
@@ -25,7 +25,7 @@
               </h2>
               <br />
               <p class="has-text-centered">
-                Bnvd a la <b>#VntanllaDgaTM</b> A das alza ls tamts cndnt a
+                Bienvenido a la <b>#VentanillaDigitalITM</b> 
               </p>
             </div>
           </div>
@@ -34,31 +34,30 @@
     </section>
     <div class="box cta">
       <p class="has-text-centered">
-        <span class="tag is-primary">Vntanlla Dgal </span> s na niciativa
+        <span class="tag is-primary">Ventanilla Digital </span> Una iniciativa
         especial para la solución de problemas generados por el coronavirus
         Covid-19
       </p>
     </div>
-    <div class="container">
-      <b-carousel>
-        <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
-          <section :class="`hero is-medium is-${carousel.color}`">
-            <div class="hero-body has-text-centered">
-              <h1 class="title">{{ carousel.text }}</h1>
-            </div>
-          </section>
+    <div class="container carousel">
+      <b-carousel :indicator-inside="false">
+        <b-carousel-item v-for="(item, i) in 6" :key="i">
+            <span class="image">
+              <img :src="getImgUrl(i)">
+            </span>
         </b-carousel-item>
-      </b-carousel>
+        <template slot="indicators" slot-scope="props">
+            <span class="al image">
+                <img :src="getImgUrl(props.i)" :title="props.i">
+            </span>
+        </template>
+    </b-carousel>
     </div>
-
-    <br />
     <section class="section" id="about">
       <div class="container has-text-centered">
         <h2 class="title">Trámites</h2>
         <p>
-          We have created a fictional band website. Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua.
+          Selecciona el trámite que deseas realizar
         </p>
       </div>
       <div class="columns is-centered">
@@ -67,7 +66,7 @@
             <div class="card-image">
               <figure class="image is-2by1">
                 <img
-                  src="https://images.pexels.com/photos/167635/pexels-photo-167635.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                  src="../../img/estudiante.jpg"
                   alt="Placeholder image"
                 />
               </figure>
@@ -75,8 +74,8 @@
             <div class="card-content">
               <div class="media">
                 <div class="media-content">
-                  <p class="title is-4">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
+                  <p class="title is-4">Constancia de estudios</p>
+                  <a href="">Solicitar</a>
                 </div>
               </div>
             </div>
@@ -87,7 +86,7 @@
             <div class="card-image">
               <figure class="image is-2by1">
                 <img
-                  src="https://images.pexels.com/photos/167635/pexels-photo-167635.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                  src="../../img/horario.jpg"
                   alt="Placeholder image"
                 />
               </figure>
@@ -95,8 +94,8 @@
             <div class="card-content">
               <div class="media">
                 <div class="media-content">
-                  <p class="title is-4">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
+                  <p class="title is-4">Horario</p>
+                  <a href="">Solicitar</a>
                 </div>
               </div>
             </div>
@@ -107,7 +106,7 @@
             <div class="card-image">
               <figure class="image is-2by1">
                 <img
-                  src="https://images.pexels.com/photos/167635/pexels-photo-167635.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                  src="../../img/seguimiento.jpg"
                   alt="Placeholder image"
                 />
               </figure>
@@ -115,8 +114,8 @@
             <div class="card-content">
               <div class="media">
                 <div class="media-content">
-                  <p class="title is-4">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
+                  <p class="title is-4">Seguimiento académico</p>
+                  <a href="">Solicitar</a>
                 </div>
               </div>
             </div>
@@ -133,17 +132,46 @@
 // @ is an alias to /src
 
 export default {
-  name: 'Home',
-  data () {
-    return {
-      carousels: [
-        { text: 'Slide 1', color: 'primary' },
-        { text: 'Slide 2', color: 'info' },
-        { text: 'Slide 3', color: 'success' },
-        { text: 'Slide 4', color: 'warning' },
-        { text: 'Slide 5', color: 'danger' }
-      ]
+    methods: {
+      getImgUrl(value) {
+          return `https://picsum.photos/id/43${value}/1230/500`
+      }
     }
-  }
 }
 </script>
+
+<style scoped>
+.image{
+  height: 350px;
+}
+
+.is-active .al img {
+    filter: grayscale(0%);
+}
+.al img {
+    filter: grayscale(100%);
+}
+
+.carousel{
+  margin-top: 50px;
+  height: 600px;
+}
+
+.carousel .image{
+  height: 500px;
+}
+
+@media screen and (max-width:500px){
+.carousel .image{
+  height: 200px;
+}
+
+.carousel{
+  height: 250px;
+}
+
+.image{
+  height: 250px;
+}
+}
+</style>
