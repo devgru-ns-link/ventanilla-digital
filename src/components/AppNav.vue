@@ -15,16 +15,14 @@
       </div>
     </div>
     <div class="navbar-menu">
-      <a class="navbar-item">
-        <img src="https://www.itmerida.mx/imagenes/tec.png" alt="Bulma" />
+      <a class="navbar-item" href="#">
+        <p>Servicios Escolares ITM</p>
+        <img src="https://www.itmerida.mx/imagenes/tec.png"  alt="Bulma" />
       </a>
     </div>
     <div class="navbar-item is-flex-touch">
       <a class="navbar-item">
-        <i class="material-icons">explore</i>
-      </a>
-      <a class="navbar-item">
-        <i class="material-icons">favorite_border</i>
+        <i class="material-icons">alarm</i>
       </a>
       <a class="navbar-item">
         <i class="material-icons">person_outline</i>
@@ -40,3 +38,14 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.navbar-item img{
+  padding-left: 20px;
+}
+
+.navbar-item p{
+  font-weight: 800;
+  font-size: 25px;
+}
+</style>

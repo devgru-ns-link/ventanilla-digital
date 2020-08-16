@@ -8,17 +8,14 @@
               <img src="https://www.itmerida.mx/imagenes/tec.png" alt="Made with Bulma" width="100" />
             </a>
             <br />
-            <strong>Bulma Fluent Theme</strong> by
-            <a href="http://mubaidr.github.com" target="_blank">Muhammad Ubaid Raza</a>
-            <br />Logos &amp; banners by
-            <a href="https://github.com/jbeguna04">Jibbie R. Eguna</a>
-            <br />Icons from
-            <a href="http://fontawesome.io/" target="_blank">Font Awesome</a>.
-            <br />The source code is licensed under
-            <a
-              href="http://opensource.org/licenses/mit-license.php"
-              target="_blank"
-            >MIT</a>.
+            <strong>Servicios Escolares</strong> del
+            <a href="https://www.itmerida.mx/" target="_blank"> ITM</a>
+            <br />Av. Tecnológico km. 4.5 S/N C.P. 97118 
+            <br />Contacto: contacto@merida.tecnm.mx
+            <br />Quejas y Sugerencias: quejasysugerencias@merida.tecnm.mx
+            <br />Tel:(999) 964-5000TEST
+            <br />
+            <br />© 2020 Derechos Reservados
           </p>
         </div>
       </div>
