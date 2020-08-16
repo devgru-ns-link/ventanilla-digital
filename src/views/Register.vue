@@ -5,9 +5,12 @@
         <div class="columns">
           <div class="column left is-hidden-touch">
             <h1 class="title is-1">Ventanilla Digital</h1>
-            <h2 class="subtitle colored is-4">Tramites electronicos para el ITM.</h2>
+            <h2 class="subtitle colored is-4">
+              Trámites electronicos para el ITM.
+            </h2>
             <p>
-              Esta es una plataforma para solicitar a distancia los tramites de control escolar y ayudar contra el covid.
+              Esta es una plataforma para solicitar a distancia los trámites de
+              control escolar y ayudar contra el <b>covid-19</b>.
             </p>
           </div>
           <div class="column right ">
@@ -19,7 +22,6 @@
             </div>
 
             <form>
-
               <!-- Como hacer otra barrita
               <b-field> 
                 <b-input type="text" placeholder="Matricula" v-model="enrollment"></b-input>
@@ -27,11 +29,22 @@
               -->
 
               <b-field type="is-success" message="La matricula esta disponible">
-                <b-input type="text" placeholder="Matricula" maxlength="30" v-model="enrollment"></b-input>
+                <b-input
+                  type="text"
+                  placeholder="Matricula"
+                  maxlength="30"
+                  v-model="enrollment"
+                ></b-input>
               </b-field>
 
               <b-field type="is-danger" message="El correo es invalido">
-                <b-input type="email" placeholder="Correo" maxlength="30" v-model="email"> </b-input>
+                <b-input
+                  type="email"
+                  placeholder="Correo"
+                  maxlength="30"
+                  v-model="email"
+                >
+                </b-input>
               </b-field>
 
               <b-field>
@@ -54,11 +67,19 @@
                 </b-input>
               </b-field>
 
-              <button class="button is-block is-primary is-fullwidth" @click="signup">
+              <button
+                class="button is-block is-primary is-fullwidth"
+                @click="signup"
+              >
                 Registrarse
               </button>
               <br />
-              <small><em>Rellena todos los datos.</em></small>
+              <small
+                ><em>¿Ya tns na cnta?</em
+                ><router-link tag="a" to="/login">
+                  Log in
+                </router-link>
+              </small>
             </form>
           </div>
         </div>
@@ -91,7 +112,8 @@
           </div>
           <div class="level-right">
             <small class="level-item" style="color: var(--textLight)">
-              &copy; Instituto Tecnologico de Merida. Todos los derechos reservados.
+              &copy; Instituto Tecnologico de Merida. Todos los derechos
+              reservados.
             </small>
           </div>
         </nav>
@@ -101,28 +123,28 @@
 </template>
 
 <script>
-import {register} from '@/api/users'
+import { register } from '@/api/users'
 export default {
-    data(){
-        return {
-            enrollment: "",
-            email: "",
-            password: "",
-            password_confirm: ""
-        }
-    },
-    methods:{
-        async signup(){
-            const res = await register({
-                enrollment: this.enrollment,
-                email: this.email,
-                password: this.password,
-                password_confirm: this.password_confirm
-            })
-            console.log(res)
-            this.$router.push("/home") //Redireccionamiento con codigo
-        }
+  data () {
+    return {
+      enrollment: '',
+      email: '',
+      password: '',
+      password_confirm: ''
     }
+  },
+  methods: {
+    async signup () {
+      const res = await register({
+        enrollment: this.enrollment,
+        email: this.email,
+        password: this.password,
+        password_confirm: this.password_confirm
+      })
+      console.log(res)
+      this.$router.push('/home') //Redireccionamiento con codigo
+    }
+  }
 }
 </script>
 
@@ -140,12 +162,12 @@ body {
   color: var(--textDark);
 }
 
-.field:not(:last-child) {
+/* .field:not(:last-child) {
   margin-bottom: 1rem;
-}
+} */
 
 .register {
-  margin-top: 10rem;
+  margin-top: 3rem;
   background: white;
   border-radius: 10px;
 }
@@ -206,4 +228,7 @@ input:focus {
   color: var(--textLight);
   margin-right: 1rem;
 }
+
+.va { display: flex; align-items: center; }
+
 </style>

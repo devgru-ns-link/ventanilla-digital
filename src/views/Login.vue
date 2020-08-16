@@ -12,7 +12,7 @@
               <div class="field">
                 <div class="control">
                   <input
-                    class="input is-large"
+                    class="input"
                     type="text"
                     placeholder="Matrícula"
                     autofocus
@@ -24,7 +24,7 @@
               <div class="field">
                 <div class="control">
                   <input
-                    class="input is-large"
+                    class="input"
                     type="password"
                     placeholder="Contraseña"
                     v-model="password"
@@ -91,7 +91,7 @@ body {
   box-shadow: none;
 }
 .box {
-  margin-top: 5rem;
+  margin-top: 1rem;
   background: white;
   border-radius: 10px;
 }
