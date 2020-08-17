@@ -2,9 +2,9 @@
   <section class="hero is-success is-fullheight">
     <div class="hero-body">
       <div class="container has-text-centered">
-        <div class="column is-4 is-offset-4">
+        <div class="column is-5 is-offset-3">
           <div class="box">
-            <h1> Ventanilla Digital</h1>
+            <h1>Ventanilla Digital</h1>
             <figure class="avatar">
               <img src="https://www.itmerida.mx/imagenes/tec.png" width="125px" alt="Logo" />
             </figure>
@@ -55,6 +55,11 @@
 
 <script>
 export default {
+  created() {
+    if (this.$store.state.isLogued) {
+      this.$router.push("/home");
+    }
+  },
   data() {
     return {
       user: {
@@ -131,14 +136,14 @@ p.subtitle {
 }
 
 .button:hover {
-  background: #D9AD26;
+  background: #d9ad26;
   color: black;
   transition: 0.6s;
 }
 
-.box h1{  
-    font-size: 40px;
-    font-weight: 800;
-    letter-spacing: -2px;
+.box h1 {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -2px;
 }
 </style>
