@@ -43,9 +43,11 @@
               </button>
             </form>
           </div>
-          <p class="has-text-grey">
-            <router-link tag="a" to="/register">Registrarse</router-link>&nbsp;·&nbsp;
-            <a href="../">Olvidé mi contraseña</a>
+          <p class="has-text-black">
+            ¿Ya tienes cuenta?&nbsp;·&nbsp;
+            <router-link tag="a" to="/register">Registrarse</router-link>
+            <br />¿Olvidaste tu contraseña? &nbsp;·&nbsp;
+            <a href="../">Recuperar contraseña</a>
           </p>
         </div>
       </div>
@@ -65,12 +67,12 @@ export default {
       user: {
         enrollment: "",
         password: "",
-      }
+      },
     };
   },
   methods: {
     async submit() {
-      await this.$store.dispatch('login', this.user)
+      await this.$store.dispatch("login", this.user);
       this.$router.push("/home"); //Redireccionamiento con codigo
     },
   },
