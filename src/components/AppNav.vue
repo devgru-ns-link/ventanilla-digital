@@ -21,9 +21,44 @@
         <a class="navbar-item">
           <i class="material-icons">notifications</i>
         </a>
-        <router-link tag="a" to="/about" class="navbar-item">
-          <i class="material-icons">person_outline</i>
-        </router-link>
+        <b-dropdown                    
+                    v-model="navigation"
+                    position="is-bottom-left"
+                    append-to-body
+                    aria-role="menu">
+                    <a
+                        class="navbar-item"
+                        slot="trigger"
+                        role="button">
+                        <i class="material-icons">person_outline</i>
+                        <b-icon icon="menu-down"></b-icon>
+                    </a>
+                    <b-dropdown-item custom aria-role="menuitem">
+                        Registrado como <b>Jacinto Canek</b>
+                    </b-dropdown-item>
+                    <hr class="dropdown-divider">
+                    <b-dropdown-item value="home" aria-role="menuitem">
+                        <b-icon icon="home"></b-icon>
+                        <router-link tag="span" to="/home">
+                          Inicio
+                        </router-link>
+                    </b-dropdown-item>
+                    <b-dropdown-item value="blog" aria-role="menuitem">
+                        <b-icon icon="book-open"></b-icon>
+                        <router-link tag="span" to="/about">
+                          Mis solicitudes
+                        </router-link>
+                    </b-dropdown-item>
+                    <hr class="dropdown-divider" aria-role="menuitem">
+                    <b-dropdown-item value="settings">
+                        <b-icon icon="settings"></b-icon>
+                        Configuración
+                    </b-dropdown-item>
+                    <b-dropdown-item value="logout" aria-role="menuitem">
+                        <b-icon icon="logout"></b-icon>
+                        Cerrar Sesión
+                    </b-dropdown-item>
+                </b-dropdown>
       </template>
       <div v-else class="buttons">
         <router-link tag="a" to="/register" class="button is-primary">
@@ -34,6 +69,16 @@
     </div>
   </div>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                navigation: 'home'
+            }
+        }
+    }
+</script>
 
 <style scoped>
 .navbar-item img {

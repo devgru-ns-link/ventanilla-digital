@@ -84,7 +84,7 @@
               <small
                 ><em>¿Ya tienes una cuenta?</em
                 ><router-link tag="a" to="/login">
-                  Log in
+                  Iniciar sesión
                 </router-link>
               </small>
             </form>
