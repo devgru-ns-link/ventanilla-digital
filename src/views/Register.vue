@@ -24,23 +24,16 @@
             <form>
               <!-- Como hacer otra barrita
               <b-field> 
-                <b-input type="text" placeholder="Matricula" v-model="user.enrollment"></b-input>
+                <b-input type="text" placeholder="Matricula" v-model="enrollment"></b-input>
               </b-field> 
               -->
-              <b-field> 
-                <b-input type="text" placeholder="Nombre/s" v-model="user.first_name"></b-input>
-              </b-field> 
-
-              <b-field> 
-                <b-input type="text" placeholder="Apellido/s" v-model="user.last_name"></b-input>
-              </b-field> 
 
               <b-field type="is-success" message="La matricula esta disponible">
                 <b-input
                   type="text"
                   placeholder="Matricula"
                   maxlength="30"
-                  v-model="user.enrollment"
+                  v-model="enrollment"
                 ></b-input>
               </b-field>
 
@@ -49,7 +42,7 @@
                   type="email"
                   placeholder="Correo"
                   maxlength="30"
-                  v-model="user.email"
+                  v-model="email"
                 >
                 </b-input>
               </b-field>
@@ -59,7 +52,7 @@
                   type="password"
                   placeholder="Contraseña"
                   password-reveal
-                  v-model="user.password"
+                  v-model="password"
                 >
                 </b-input>
               </b-field>
@@ -69,7 +62,7 @@
                   type="password"
                   placeholder="Confirmar contraseña"
                   password-reveal
-                  v-model="user.password_confirm"
+                  v-model="password_confirm"
                 >
                 </b-input>
               </b-field>
@@ -82,9 +75,9 @@
               </button>
               <br />
               <small
-                ><em>¿Ya tienes una cuenta?</em
+                ><em>¿Ya tns na cnta?</em
                 ><router-link tag="a" to="/login">
-                  Iniciar sesión
+                  Log in
                 </router-link>
               </small>
             </form>
@@ -134,20 +127,20 @@ import { register } from '@/api/users'
 export default {
   data () {
     return {
-      user: {
-      first_name: '',
-      last_name: '',
       enrollment: '',
       email: '',
       password: '',
       password_confirm: ''
-      }
-
     }
   },
   methods: {
     async signup () {
-      const res = await register(this.user)
+      const res = await register({
+        enrollment: this.enrollment,
+        email: this.email,
+        password: this.password,
+        password_confirm: this.password_confirm
+      })
       console.log(res)
       this.$router.push('/home') //Redireccionamiento con codigo
     }

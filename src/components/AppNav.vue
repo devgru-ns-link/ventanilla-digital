@@ -3,7 +3,11 @@
     <div class="navbar-brand">
       <div class="navbar-item">
         <div class="control has-icons-left">
-          <input class="input is-small has-text-centered" type="text" placeholder="search" />
+          <input
+            class="input is-small has-text-centered"
+            type="text"
+            placeholder="search"
+          />
           <span class="icon is-left is-small">
             <i class="material-icons">search</i>
           </span>
@@ -11,81 +15,36 @@
       </div>
     </div>
     <div class="navbar-menu">
-      <router-link tag="a" to="/home" class="navbar-item">
+      <a class="navbar-item" href="#">
         <p>Servicios Escolares ITM</p>
-        <img src="https://www.itmerida.mx/imagenes/tec.png" alt="Bulma" />
-      </router-link>
+        <img src="https://www.itmerida.mx/imagenes/tec.png"  alt="Bulma" />
+      </a>
     </div>
     <div class="navbar-item is-flex-touch">
-      <template v-if="$store.state.isLogued">
-        <a class="navbar-item">
-          <i class="material-icons">notifications</i>
-        </a>
-        <b-dropdown                    
-                    v-model="navigation"
-                    position="is-bottom-left"
-                    append-to-body
-                    aria-role="menu">
-                    <a
-                        class="navbar-item"
-                        slot="trigger"
-                        role="button">
-                        <i class="material-icons">person_outline</i>
-                        <b-icon icon="menu-down"></b-icon>
-                    </a>
-                    <b-dropdown-item custom aria-role="menuitem">
-                        Registrado como <b>Jacinto Canek</b>
-                    </b-dropdown-item>
-                    <hr class="dropdown-divider">
-                    <b-dropdown-item value="home" aria-role="menuitem">
-                        <b-icon icon="home"></b-icon>
-                        <router-link tag="span" to="/home">
-                          Inicio
-                        </router-link>
-                    </b-dropdown-item>
-                    <b-dropdown-item value="blog" aria-role="menuitem">
-                        <b-icon icon="book-open"></b-icon>
-                        <router-link tag="span" to="/about">
-                          Mis solicitudes
-                        </router-link>
-                    </b-dropdown-item>
-                    <hr class="dropdown-divider" aria-role="menuitem">
-                    <b-dropdown-item value="settings">
-                        <b-icon icon="settings"></b-icon>
-                        Configuración
-                    </b-dropdown-item>
-                    <b-dropdown-item value="logout" aria-role="menuitem">
-                        <b-icon icon="logout"></b-icon>
-                        Cerrar Sesión
-                    </b-dropdown-item>
-                </b-dropdown>
-      </template>
-      <div v-else class="buttons">
+      <a class="navbar-item">
+        <i class="material-icons">alarm</i>
+      </a>
+      <a class="navbar-item">
+        <i class="material-icons">person_outline</i>
+      </a>
+      <div class="buttons">
         <router-link tag="a" to="/register" class="button is-primary">
           <strong>Sign up</strong>
         </router-link>
-        <router-link tag="a" to="/login" class="button is-light">Log in</router-link>
+        <router-link tag="a" to="/login" class="button is-light"> 
+          Log in
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-    export default {
-        data() {
-            return {
-                navigation: 'home'
-            }
-        }
-    }
-</script>
-
 <style scoped>
-.navbar-item img {
+.navbar-item img{
   padding-left: 20px;
 }
 
-.navbar-item p {
+.navbar-item p{
   font-weight: 800;
   font-size: 25px;
 }
