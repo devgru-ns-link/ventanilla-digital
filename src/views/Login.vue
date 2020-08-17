@@ -2,7 +2,7 @@
   <section class="hero is-success is-fullheight">
     <div class="hero-body">
       <div class="container has-text-centered">
-        <div class="column is-5 is-offset-3">
+        <div class="column is-4 is-offset-4">
           <div class="box">
             <h1>Ventanilla Digital</h1>
             <figure class="avatar">
