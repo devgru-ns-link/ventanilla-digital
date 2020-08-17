@@ -16,7 +16,7 @@
                     type="text"
                     placeholder="Matrícula"
                     autofocus
-                    v-model="user.enrollment"
+                    v-model="enrollment"
                   />
                 </div>
               </div>
@@ -27,7 +27,7 @@
                     class="input"
                     type="password"
                     placeholder="Contraseña"
-                    v-model="user.password"
+                    v-model="password"
                   />
                 </div>
               </div>
@@ -54,18 +54,21 @@
 </template>
 
 <script>
+import { login } from "@/api/users";
 export default {
   data() {
     return {
-      user: {
-        enrollment: "",
-        password: "",
-      }
+      enrollment: "",
+      password: "",
     };
   },
   methods: {
     async submit() {
-      await this.$store.dispatch('login', this.user)
+      const res = await login({
+        enrollment: this.enrollment,
+        password: this.password,
+      });
+      console.log(res);
       this.$router.push("/home"); //Redireccionamiento con codigo
     },
   },
