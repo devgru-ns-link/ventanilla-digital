@@ -22,8 +22,10 @@
     </div>
     <div class="navbar-item is-flex-touch nav">
       <template v-if="$store.state.isLogued">
+
         <a class="navbar-item">
           <i class="material-icons">notifications</i>
+          <small class="badge">3</small>
         </a>
         <b-dropdown
           v-model="navigation"
@@ -87,6 +89,17 @@ export default {
 </script>
 
 <style scoped>
+.badge {
+  position: absolute;
+  top: -3px;
+  right: -1px;
+  padding: 1px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 100%;
+  background: red;
+  color: white;
+}
 .navbar-item img {
   padding-left: 20px;
 }
@@ -94,15 +107,6 @@ export default {
 .navbar-item p {
   font-weight: 800;
   font-size: 25px;
-}
-@media screen and (max-width: 375px) {
-  .navbar-brand{
-    display: none;
-  } 
-
-  .nav{
-    margin-left: 30vw;
-  }
 }
 </style>
  

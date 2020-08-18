@@ -75,7 +75,7 @@
                   <p
                     class="hide"
                   >La constancia de estudios es un documento que válida tu participación como estudiante en la institución, es requerida en trámites como becas.</p>
-                  <br />
+                  
                   <router-link tag="a" to="/register" class="button is-primary">
                     <strong>Solicitar</strong>
                   </router-link>
@@ -98,7 +98,7 @@
                   <p
                     class="hide"
                   >El horario es una herramienta que te ayudará a organizarte para tus clases, además de que es muy útil para presentar como evidencia a quién lo solicite.</p>
-                  <br />
+                  
                   <router-link tag="a" to="/register" class="button is-primary">
                     <strong>Solicitar</strong>
                   </router-link>
@@ -121,7 +121,7 @@
                   <p
                     class="hide"
                   >El seguimiento escolar es un documento que te ayudará a ver tu historial académico, es útil para ver tu progreso escolar.</p>
-                  <br />
+                  
                   <router-link tag="a" to="/register" class="button is-primary">
                     <strong>Solicitar</strong>
                   </router-link>
