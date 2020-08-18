@@ -3,7 +3,7 @@
 ## Description
 Frontend Digital-Window
 
-## Requirements
+## Requirements and documentation
 
 - [CSS](https://developer.mozilla.org/es/docs/Web/CSS)
 - [HTML](https://devdocs.io/html/)
@@ -12,6 +12,7 @@ Frontend Digital-Window
 - [Babel](https://babeljs.io/docs/en/)
 - [Github](https://desktop.github.com/)
 - [Git](https://git-scm.com/downloads)
+- [Vue.js](https://www.vuemastery.com/pdf/Vue-Essentials-Cheat-Sheet.pdf)
 
 ## Instalation comands
 ```
@@ -34,3 +35,7 @@ npm run build
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## util links
+
+(https://awesomejs.dev/for/vue-cli/pkg/245665373358129666/)
