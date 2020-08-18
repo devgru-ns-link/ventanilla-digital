@@ -5,20 +5,17 @@
         <div class="columns">
           <div class="column left is-hidden-touch">
             <h1 class="title is-1">Ventanilla Digital</h1>
-            <h2 class="subtitle colored is-4">
-              Trámites electronicos para el ITM.
-            </h2>
+            <h2 class="subtitle colored is-4">Trámites electronicos para el ITM.</h2>
             <p>
               Esta es una plataforma para solicitar a distancia los trámites de
-              control escolar y ayudar contra el <b>covid-19</b>.
+              control escolar y ayudar contra el
+              <b>covid-19</b>.
             </p>
           </div>
-          <div class="column right ">
+          <div class="column right">
             <div class="has-text-centered">
               <h1 class="title is-4">Registrate ahora!</h1>
-              <p class="description">
-                El usuario es necesario para acceder a los tramites en linea
-              </p>
+              <p class="description">El usuario es necesario para acceder a los tramites en linea</p>
             </div>
 
             <form>
@@ -27,13 +24,13 @@
                 <b-input type="text" placeholder="Matricula" v-model="user.enrollment"></b-input>
               </b-field> 
               -->
-              <b-field> 
+              <b-field>
                 <b-input type="text" placeholder="Nombre/s" v-model="user.first_name"></b-input>
-              </b-field> 
+              </b-field>
 
-              <b-field> 
+              <b-field>
                 <b-input type="text" placeholder="Apellido/s" v-model="user.last_name"></b-input>
-              </b-field> 
+              </b-field>
 
               <b-field type="is-success" message="La matricula esta disponible">
                 <b-input
@@ -45,13 +42,7 @@
               </b-field>
 
               <b-field type="is-danger" message="El correo es invalido">
-                <b-input
-                  type="email"
-                  placeholder="Correo"
-                  maxlength="30"
-                  v-model="user.email"
-                >
-                </b-input>
+                <b-input type="email" placeholder="Correo" maxlength="30" v-model="user.email"></b-input>
               </b-field>
 
               <b-field>
@@ -60,8 +51,7 @@
                   placeholder="Contraseña"
                   password-reveal
                   v-model="user.password"
-                >
-                </b-input>
+                ></b-input>
               </b-field>
 
               <b-field>
@@ -70,22 +60,14 @@
                   placeholder="Confirmar contraseña"
                   password-reveal
                   v-model="user.password_confirm"
-                >
-                </b-input>
+                ></b-input>
               </b-field>
 
-              <button
-                class="button is-block is-primary is-fullwidth"
-                @click="signup"
-              >
-                Registrarse
-              </button>
+              <button class="button is-block is-primary is-fullwidth" @click="signup">Registrarse</button>
               <br />
-              <small
-                ><em>¿Ya tienes una cuenta?</em
-                ><router-link tag="a" to="/login">
-                  Iniciar sesión
-                </router-link>
+              <small>
+                <em>¿Ya tienes una cuenta?</em>
+                <router-link tag="a" to="/login">Iniciar sesión</router-link>
               </small>
             </form>
           </div>
@@ -130,29 +112,28 @@
 </template>
 
 <script>
-import { register } from '@/api/users'
+import { register } from "@/api/users";
 export default {
-  data () {
+  data() {
     return {
       user: {
-      first_name: '',
-      last_name: '',
-      enrollment: '',
-      email: '',
-      password: '',
-      password_confirm: ''
-      }
-
-    }
+        first_name: "",
+        last_name: "",
+        enrollment: "",
+        email: "",
+        password: "",
+        password_confirm: "",
+      },
+    };
   },
   methods: {
-    async signup () {
-      const res = await register(this.user)
-      console.log(res)
-      this.$router.push('/home') //Redireccionamiento con codigo
-    }
-  }
-}
+    async signup() {
+      const res = await register(this.user);
+      console.log(res);
+      this.$router.push("/home"); //Redireccionamiento con codigo
+    },
+  },
+};
 </script>
 
 <style>
@@ -236,6 +217,8 @@ input:focus {
   margin-right: 1rem;
 }
 
-.va { display: flex; align-items: center; }
-
+.va {
+  display: flex;
+  align-items: center;
+}
 </style>

@@ -9,9 +9,9 @@
         <div class="container has-text-centered">
           <div class="columns is-vcentered">
             <div class="column is-5">
-              <figure class="is-4by3">
+              <figure class="is-4by3">    
                 <img
-                  src="https://image.freepik.com/vector-gratis/ilustracion-concepto-estudiar_114360-1107.jpg"
+                  src="../../img/Studying-pana.svg"
                   alt="Description"
                 />
               </figure>
@@ -176,22 +176,24 @@ export default {
   background: #262626;
   top: 0;
   left: 100%;
-  padding: 60px 30px;
 }
 .card:hover .card-content {
   top: 0;
   left: 0%;
 }
 
-.card .card-content h2 {
-  color: #fff;
-  text-align: center;
-  margin: 0;
-  padding: 0 0 10px;
-  border-bottom: 2px solid #fff;
-}
 .card .card-content p {
-  margin: 20px 0 0;
+  margin: 1vh 0 0;
+  color: #fff;
+  padding-bottom: 2vh;
+}
+
+.hide p{
+  font-size: 2vh;
+}
+
+.card .card-content a {
+  margin: 2vh 0 0;
   color: #fff;
 }
 
@@ -211,9 +213,18 @@ export default {
   height: 500px;
 }
 
+@media screen and (max-width: 1024px) {
+  .hide {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 769px) {
   .card {
     height: 50vw;
+  }
+  .hide {
+    display: inline;
   }
 }
 
