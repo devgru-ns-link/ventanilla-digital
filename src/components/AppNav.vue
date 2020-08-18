@@ -20,7 +20,7 @@
         <img src="https://www.itmerida.mx/imagenes/tec.png" alt="Bulma" />
       </router-link>
     </div>
-    <div class="navbar-item is-flex-touch">
+    <div class="navbar-item is-flex-touch nav">
       <template v-if="$store.state.isLogued">
         <a class="navbar-item">
           <i class="material-icons">notifications</i>
@@ -95,4 +95,14 @@ export default {
   font-weight: 800;
   font-size: 25px;
 }
+@media screen and (max-width: 375px) {
+  .navbar-brand{
+    display: none;
+  } 
+
+  .nav{
+    margin-left: 30vw;
+  }
+}
 </style>
+ 
