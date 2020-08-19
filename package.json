@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "publish": "npm run build && node ./publish.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -21,6 +22,7 @@
     "@vue/cli-plugin-router": "~4.4.0",
     "@vue/cli-plugin-vuex": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
+    "gh-pages": "^3.1.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^9.0.3",
     "vue-cli-plugin-buefy": "~0.3.7",
