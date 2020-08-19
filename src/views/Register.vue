@@ -62,8 +62,10 @@
                   v-model="user.password_confirm"
                 ></b-input>
               </b-field>
-
-              <button class="button is-block is-primary is-fullwidth" @click="signup">Registrarse</button>
+              <button
+                class="button is-block is-primary is-fullwidth"
+                @click="signup"
+              >Registrarse</button>
               <br />
               <small>
                 <em>¿Ya tienes una cuenta?</em>
@@ -130,7 +132,18 @@ export default {
     async signup() {
       const res = await register(this.user);
       console.log(res);
-      this.$router.push("/home"); //Redireccionamiento con codigo
+      this.$buefy.dialog.alert({
+        title: "¡Ya casi!",
+        message:
+          "Por favor checa tu correo para confirmar tu cuenta",
+        type: "is-success",
+        hasIcon: true,
+        icon: "check-circle",
+        iconPack: "fa",
+        ariaRole: "alertdialog",
+        ariaModal: true,
+      }); 
+      await this.$router.push("/home"); //Redireccionamiento con codigo
     },
   },
 };
