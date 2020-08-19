@@ -15,3 +15,11 @@ export function register (data) {
     data
   })
 }
+
+export function accountVerify (data) {
+  return request({
+    url: '/accounts/verify-registration/',
+    method: 'POST',
+    data
+  })
+}
