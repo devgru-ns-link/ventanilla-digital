@@ -3,14 +3,9 @@
     <div class="navbar-brand">
       <div class="navbar-item">
         <div class="control has-icons-left">
-          <input
-            class="input is-small has-text-centered"
-            type="text"
-            placeholder="search"
-          />
-          <span class="icon is-left is-small">
-            <i class="material-icons">search</i>
-          </span>
+          <form action>
+            <input type="search" name="nombre" placeholder="Buscar" />
+          </form>
         </div>
       </div>
     </div>
@@ -22,47 +17,38 @@
     </div>
     <div class="navbar-item is-flex-touch nav">
       <template v-if="$store.state.isLogued">
-
         <a class="navbar-item">
           <i class="material-icons">notifications</i>
           <small class="badge">3</small>
         </a>
-        <b-dropdown
-          v-model="navigation"
-          position="is-bottom-left"
-          append-to-body
-          aria-role="menu"
-        >
+        <b-dropdown v-model="navigation" position="is-bottom-left" append-to-body aria-role="menu">
           <a class="navbar-item" slot="trigger" role="button">
             <i class="material-icons">person_outline</i>
             <b-icon icon="menu-down"></b-icon>
           </a>
           <b-dropdown-item custom aria-role="menuitem">
-            Registrado como <b>Jacinto Canek</b>
+            Registrado como
+            <b>Jacinto Canek</b>
           </b-dropdown-item>
           <hr class="dropdown-divider" />
           <b-dropdown-item has-link value="home" aria-role="menuitem">
             <router-link tag="a" to="/home">
-              <b-icon icon="home"></b-icon>
-              Inicio
+              <b-icon icon="home"></b-icon>Inicio
             </router-link>
           </b-dropdown-item>
           <b-dropdown-item has-link value="blog" aria-role="menuitem">
             <router-link tag="a" to="/about">
-              <b-icon icon="book-open"></b-icon>
-              Mis solicitudes
+              <b-icon icon="book-open"></b-icon>Mis solicitudes
             </router-link>
           </b-dropdown-item>
           <hr class="dropdown-divider" aria-role="menuitem" />
           <b-dropdown-item has-link value="settings">
             <router-link tag="a" to="/about">
-              <b-icon icon="cog"></b-icon>
-              Configuración
+              <b-icon icon="cog"></b-icon>Configuración
             </router-link>
           </b-dropdown-item>
           <b-dropdown-item value="logout" aria-role="menuitem">
-            <b-icon icon="logout"></b-icon>
-            Cerrar Sesión
+            <b-icon icon="logout"></b-icon>Cerrar Sesión
           </b-dropdown-item>
         </b-dropdown>
       </template>
@@ -70,9 +56,7 @@
         <router-link tag="a" to="/register" class="button is-primary">
           <strong>Sign up</strong>
         </router-link>
-        <router-link tag="a" to="/login" class="button is-light"
-          >Log in</router-link
-        >
+        <router-link tag="a" to="/login" class="button is-light">Log in</router-link>
       </div>
     </div>
   </div>
@@ -80,15 +64,37 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      navigation: 'home'
-    }
-  }
-}
+      navigation: "home",
+    };
+  },
+};
 </script>
 
 <style scoped>
+/*Inicia search*/
+
+input[type="search"]{
+    width: 45px; /*ancho por defecto*/
+    background: #ededed url('https://antocas.com/demos/search-css3/search-icon.png') no-repeat 9px center; /*icono lupa*/
+    padding: 9px 10px 9px 32px;
+    border-radius: 15em;
+    -webkit-transition: all .5s; /* transición de .5seg a todos los elementos para chrome*/
+    -moz-transition: all .5s; /* transición de .5seg a todos los elementos para mozilla*/
+    -o-transition: all .5s; /* transición de .5seg a todos los elementos para ophera*/
+    transition: all .5s; /* transición de .5seg a todos los elementos*/
+    outline: none; /* ocultar el fucos automático de los input */
+}
+input[type="search"]:focus{
+    width: 230px; /*tamaño del boton buscar al hacer click*/
+    padding-left: 32px; /*espacio entre el icono lupa y el placeholder*/
+    color: #000;
+    background-color: #FFF;
+}
+
+/*termina search*/
+
 .badge {
   position: absolute;
   top: -3px;
