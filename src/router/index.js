@@ -34,7 +34,7 @@ const routes = [
     component: () => import('../views/Register.vue')
   },
   {
-    path: '/email_verification',
+    path: '/verify-user',
     name: 'EmailVerification',
     component: () => import('../views/EmailVerification.vue')
   }
