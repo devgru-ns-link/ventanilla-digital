@@ -89,16 +89,9 @@
                 </b-field>
                 <button class="button is-block is-primary is-fullwidth" @click="signup">Registrarse</button>
                 <br />
-                <button class="button" @click="resetForm">
-                  <span class="icon is-small">
-                    <i class="fas fa-redo"></i>
-                  </span>
-                  <span>Reset</span>
-                </button>
-                <br />
                 <small>
                   <em>¿Ya tienes una cuenta?</em>
-                  <router-link tag="a" to="/login">Iniciar sesión</router-link>
+                  <router-link tag="a" to="/login"> Iniciar sesión</router-link>
                 </small>
               </form>
             </ValidationObserver>
