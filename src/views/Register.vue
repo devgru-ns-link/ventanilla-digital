@@ -18,62 +18,90 @@
               <p class="description">El usuario es necesario para acceder a los tramites en linea</p>
             </div>
 
-            <form>
-              <!-- Como hacer otra barrita
+            <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
+              <form>
+                <!-- Como hacer otra barrita
               <b-field> 
                 <b-input type="text" placeholder="Matricula" v-model="user.enrollment"></b-input>
               </b-field> 
-              -->
-              <b-field>
-                <b-input type="text" placeholder="Nombre(s)" v-model="user.first_name"></b-input>
-              </b-field>
+                -->
+                <b-field>
+                  <BInputWithValidation
+                    rules="required"
+                    type="text"
+                    placeholder="Nombre(s)"
+                    v-model="user.first_name"
+                  />
+                </b-field>
 
-              <b-field>
-                <b-input type="text" placeholder="Apellido(s)" v-model="user.last_name"></b-input>
-              </b-field>
+                <b-field>
+                  <BInputWithValidation
+                    rules="required"
+                    type="text"
+                    placeholder="Apellido(s)"
+                    v-model="user.last_name"
+                  />
+                </b-field>
 
-              <b-field type="text" :isValid="false">
-                <b-input
-                  type="text"
-                  placeholder="Matricula"
-                  use-html5-validation
-                  required
-                  validation-message="La matricula esta disponible"
-                  v-model="user.enrollment"
-                ></b-input>
-              </b-field>
+                <b-field type="text" :isValid="false">
+                  <BInputWithValidation
+                    rules="required"
+                    type="text"
+                    placeholder="Matricula"
+                    use-html5-validation
+                    required
+                    validation-message="La matricula esta disponible"
+                    v-model="user.enrollment"
+                  />
+                </b-field>
 
-              <b-field type="text" >
-                <b-input type="email" pattern="(E|e|le|LE)[0-9]+@((itmerida[.]edu[.]mx)|(merida[.]tecnm[.]mx))" validation-message="El correo es inválido" placeholder="Correo"  v-model="user.email"></b-input>
-              </b-field>
+                <b-field>
+                  <BInputWithValidation
+                    rules="required|email"
+                    type="email"
+                    v-model="user.email"
+                    pattern="(E|e|le|LE)[0-9]+@((itmerida[.]edu[.]mx)|(merida[.]tecnm[.]mx))"
+                    validation-message="El correo es inválido"
+                    placeholder="Correo"
+                  />
+                </b-field>
 
-              <b-field>
-                <b-input
-                  type="password"
-                  placeholder="Contraseña"
-                  password-reveal
-                  v-model="user.password"
-                ></b-input>
-              </b-field>
+                <b-field>
+                  <BInputWithValidation
+                    rules="required"
+                    type="password"
+                    placeholder="Contraseña"
+                    password-reveal
+                    vid="password"
+                    v-model="user.password"
+                  />
+                </b-field>
 
-              <b-field>
-                <b-input
-                  type="password"
-                  placeholder="Confirmar contraseña"
-                  password-reveal
-                  v-model="user.password_confirm"
-                ></b-input>
-              </b-field>
-              <button
-                class="button is-block is-primary is-fullwidth"
-                @click="signup"
-              >Registrarse</button>
-              <br />
-              <small>
-                <em>¿Ya tienes una cuenta?</em>
-                <router-link tag="a" to="/login">Iniciar sesión</router-link>
-              </small>
-            </form>
+                <b-field>
+                  <BInputWithValidation
+                    rules="required|confirmed:password"
+                    name="Password"
+                    type="password"
+                    placeholder="Confirmar contraseña"
+                    password-reveal
+                    v-model="user.password_confirm"
+                  />
+                </b-field>
+                <button class="button is-block is-primary is-fullwidth" @click="signup">Registrarse</button>
+                <br />
+                <button class="button" @click="resetForm">
+                  <span class="icon is-small">
+                    <i class="fas fa-redo"></i>
+                  </span>
+                  <span>Reset</span>
+                </button>
+                <br />
+                <small>
+                  <em>¿Ya tienes una cuenta?</em>
+                  <router-link tag="a" to="/login">Iniciar sesión</router-link>
+                </small>
+              </form>
+            </ValidationObserver>
           </div>
         </div>
       </div>
@@ -117,7 +145,18 @@
 
 <script>
 import { register } from "@/api/users";
+import { ValidationObserver } from "vee-validate";
+import BSelectWithValidation from "@/components/inputs/BSelectWithValidation";
+import BInputWithValidation from "@/components/inputs/BInputWithValidation";
+import BCheckboxesWithValidation from "@/components/inputs/BCheckboxesWithValidation";
+
 export default {
+  components: {
+    ValidationObserver,
+    BSelectWithValidation,
+    BInputWithValidation,
+    BCheckboxesWithValidation,
+  },
   data() {
     return {
       user: {
@@ -128,24 +167,40 @@ export default {
         password: "",
         password_confirm: "",
       },
+      email: "",
+      password: "",
+      confirmation: "",
+      subject: "",
+      choices: [],
     };
   },
+
   methods: {
     async signup() {
       const res = await register(this.user);
       console.log(res);
       this.$buefy.dialog.alert({
         title: "¡Ya casi!",
-        message:
-          "Por favor checa tu correo para confirmar tu cuenta",
+        message: "Por favor checa tu correo para confirmar tu cuenta",
         type: "is-success",
         hasIcon: true,
         icon: "check-circle",
         iconPack: "fa",
         ariaRole: "alertdialog",
         ariaModal: true,
-      }); 
+      });
       await this.$router.push("/home"); //Redireccionamiento con codigo
+    },
+
+    resetForm() {
+      this.email = "";
+      this.password = "";
+      this.confirmation = "";
+      this.subject = "";
+      this.choices = [];
+      requestAnimationFrame(() => {
+        this.$refs.observer.reset();
+      });
     },
   },
 };
