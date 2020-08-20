@@ -75,27 +75,6 @@ $link-focus-border: $primary;
 </style>
 
 <style>
-.navbar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 2;
-  background-color: white;
-  justify-content: space-around;
-  width: 100%;
-  border-bottom: 1px solid lightgray;
-}
-.navbar-menu {
-  flex-grow: 0.5;
-  justify-content: center;
-}
-.navbar-menu .navbar-item {
-  flex-grow: 1;
-  justify-content: center;
-}
-.navbar-menu .navbar-item .control {
-  width: 50%;
-}
 .body-columns {
   margin-top: 10vh;
 }
@@ -123,11 +102,5 @@ $link-focus-border: $primary;
 .footer {
   margin-top: 10vh;
   padding: 2rem 1.5rem;
-}
-
-@media screen and (max-width: 786px) {
-  .navbar {
-    justify-content: space-between;
-  }
 }
 </style>

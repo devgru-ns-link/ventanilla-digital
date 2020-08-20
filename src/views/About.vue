@@ -1,69 +1,80 @@
 <template>
   <div>
-    <br />
-    <br />
-    <section class="hero is-medium">
+    <br /><br />
+    <section class="hero">
       <div class="hero-body">
         <div class="container">
           <article class="media">
             <figure class="media-left">
-              <p class="image is-128x128">
+              <div class="image is-128x128">
                 <img
                   class="is-rounded"
-                  src="https://bulma.io/images/placeholders/128x128.png"
+                  src="https://www.becas-santander.com/assets/images/loggedUser.jpg"
                 />
-              </p>
+              </div>
             </figure>
             <div class="media-content">
               <div class="content">
-                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-                <p>
-                  <small>Instituto Tecnológico de Mérida</small>
-                  <br />
-                  <ul>
-                    <li>{{ user.enrollment }}</li>
-                    <li>Aún no has indicado tu carrera</li>
-                    <li>Aún no has indicado tu semestre</li>
-                  </ul>
-                </p>
+                <h1 class="title is-3">
+                  {{ user.first_name }} {{ user.last_name }}
+                </h1>
+                <p class="subtitle is-5">Instituto Tecnológico de Mérida</p>
+
+                <ul>
+                  <li>{{ user.enrollment }}</li>
+                  <li>Aún no has indicado tu carrera</li>
+                  <li>Aún no has indicado tu semestre</li>
+                </ul>
               </div>
-            </div>
-            <div class="media-right">
-              <span class="icon is-left is-small">
-                <i class="material-icons">settings</i>
-              </span>
             </div>
           </article>
         </div>
       </div>
     </section>
-    <section class="section" id="portfolio">
+
+    <section class="section">
       <div class="container">
-        <div class="section-heading">
-          <h3 class="title is-2">Mis solicitudes</h3>
-        </div>
-        <div class="columns">
-          <div class="column is-4">
-            <!-- admin -->
+        <h2 class="title">Mis solicitudes</h2>
+        <b-message type="is-warning" has-icon>
+          An n has alzad algn tamt slctd
+        </b-message>
+        <b-message type="is-info" has-icon>
+          Ts slctds y tamts aacan a dnd das v s stad
+        </b-message>
+
+        <b-button size="is-large is-primary" icon-right="arrow-right"
+          >Nuevo tramite</b-button
+        >
+
+        <div class="columns is-centered is-multiline is-mobile">
+          <div v-for="_ in 10" class="column is-one-quarter-desktop">
             <div class="card">
+              <div class="card-image"></div>
               <header class="card-header">
-                <p class="card-header-title">
+                <div class="card-header-title">
                   <span>Admin <small>(Light)</small></span>
                   <span class="is-pulled-right">
-                    <a
-                      href="https://github.com/jgthms/bulma/releases/tag/0.7.2"
-                    >
-                      <span class="tag is-default">v0.7.2</span>
-                    </a>
                     <span class="tag is-default">Desktop</span>
                     <span class="tag is-danger">WIP</span>
                   </span>
-                </p>
+                </div>
               </header>
+
               <div class="card-content">
-                <figure class="image">
-                  <img src="" alt="Admin template screenshot" />
-                </figure>
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4">John Smith</p>
+                    <p class="subtitle is-6">@johnsmith</p>
+                  </div>
+                </div>
+
+                <div class="content">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Phasellus nec iaculis mauris.
+                  <a>@bulmaio</a>.
+                  <a href="#">#css</a>
+                  <a href="#">#responsive</a>
+                </div>
               </div>
               <footer class="card-footer">
                 <a href="templates/admin.html" class="card-footer-item"
@@ -86,11 +97,11 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  async created() {
+  async created () {
     await this.$store.dispatch('getStudent')
   },
   computed: {
-    ...mapState(['user','student'])
+    ...mapState(['user', 'student'])
   }
 }
 </script>
