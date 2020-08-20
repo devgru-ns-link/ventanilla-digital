@@ -87,7 +87,7 @@
                     v-model="user.password_confirm"
                   />
                 </b-field>
-                <button class="button is-block is-primary is-fullwidth" @click="signup">Registrarse</button>
+                <button class="button is-block is-primary is-fullwidth" @click="signup, handleSubmit(submit)">Registrarse</button>
                 <br />
                 <small>
                   <em>¿Ya tienes una cuenta?</em>

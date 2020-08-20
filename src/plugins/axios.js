@@ -3,7 +3,7 @@ import { getToken } from './cookies'
 
 // create singleton for axios
 const service = axios.create({
-  baseURL: 'http://localhost:8000/api/v1', // URL
+  baseURL: 'https://digital-window.herokuapp.com/api/v1', // URL
   mode: 'cors',
   credentials: 'same-origin',
   timeout: 20000

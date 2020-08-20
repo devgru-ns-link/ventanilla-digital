@@ -28,7 +28,7 @@
           </a>
           <b-dropdown-item custom aria-role="menuitem">
             Registrado como
-            <b>Jacinto Canek</b>
+            <b>{{ $store.state.user.enrollment }}</b>
           </b-dropdown-item>
           <hr class="dropdown-divider" />
           <b-dropdown-item has-link value="home" aria-role="menuitem">
