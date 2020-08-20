@@ -97,6 +97,7 @@ export default {
       this.isLoading = true
       try {
         await this.$store.dispatch('login', this.user)
+        await this.$store.dispatch('verifyToken', this.user)
         this.$router.push('/home') //Redireccionamiento con codigo
       } catch (error) {
         this.alertCustomError()
