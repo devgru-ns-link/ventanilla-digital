@@ -2,11 +2,15 @@
   <section class="hero is-success is-fullheight">
     <div class="hero-body">
       <div class="container has-text-centered">
-        <div class="column is-4 is-offset-4">
+        <div class="column is-5 is-offset-4">
           <div class="box">
             <h1>Ventanilla Digital</h1>
             <figure class="avatar">
-              <img src="https://www.itmerida.mx/imagenes/tec.png" width="125px" alt="Logo" />
+              <img
+                src="https://www.itmerida.mx/imagenes/tec.png"
+                width="125px"
+                alt="Logo"
+              />
             </figure>
             <form>
               <div class="field">
@@ -37,17 +41,21 @@
                   Recuérdame
                 </label>
               </div>
-              <button class="button is-block is-info is-large is-fullwidth" @click="submit">
+              <button
+                class="button is-block is-info is-large is-fullwidth"
+                :class=" {'is-loading': isLoading}"
+                @click.prevent="submit"
+              >
                 Iniciar sesión
                 <i class="fa fa-sign-in" aria-hidden="true"></i>
               </button>
             </form>
           </div>
           <p class="has-text-black">
-            ¿Ya tienes cuenta?&nbsp;·&nbsp;
+            ¿N tienes na cuenta?&nbsp;·&nbsp;
             <router-link tag="a" to="/register">Registrarse</router-link>
-            <br />¿Olvidaste tu contraseña? &nbsp;·&nbsp;
-            <a href="../">Recuperar contraseña</a>
+            <!-- <br />¿Olvidaste tu contraseña? &nbsp;·&nbsp;
+            <a href="../">Recuperar contraseña</a> -->
           </p>
         </div>
       </div>
@@ -57,32 +65,53 @@
 
 <script>
 export default {
-  created() {
+  created () {
     if (this.$store.state.isLogued) {
-      this.$router.push("/home");
+      this.$router.push('/home')
     }
   },
-  data() {
+  data () {
     return {
       user: {
-        enrollment: "",
-        password: "",
+        enrollment: '',
+        password: ''
       },
-    };
+      isLoading: false
+    }
   },
   methods: {
-    async submit() {
-      await this.$store.dispatch("login", this.user);
-      this.$router.push("/home"); //Redireccionamiento con codigo
+    alertCustomError () {
+      this.$buefy.dialog.alert({
+        title: 'Error',
+        message:
+          "Something's not good but I have a custom <b>icon</b> and <b>type</b>",
+        type: 'is-danger',
+        hasIcon: true,
+        icon: 'times-circle',
+        iconPack: 'fa',
+        ariaRole: 'alertdialog',
+        ariaModal: true
+      })
     },
-  },
-};
+    async submit () {
+      this.isLoading = true
+      try {
+        await this.$store.dispatch('login', this.user)
+        this.$router.push('/home') //Redireccionamiento con codigo
+      } catch (error) {
+        this.alertCustomError()
+      } finally {
+        this.isLoading = false
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>
 html,
 body {
-  font-family: "Questrial", sans-serif;
+  font-family: 'Questrial', sans-serif;
   font-size: 14px;
   font-weight: 300;
 }

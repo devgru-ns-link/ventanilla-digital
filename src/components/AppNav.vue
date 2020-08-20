@@ -47,7 +47,7 @@
               <b-icon icon="cog"></b-icon>Configuración
             </router-link>
           </b-dropdown-item>
-          <b-dropdown-item value="logout" aria-role="menuitem">
+          <b-dropdown-item @click="logout" value="logout" aria-role="menuitem">
             <b-icon icon="logout"></b-icon>Cerrar Sesión
           </b-dropdown-item>
         </b-dropdown>
@@ -69,6 +69,12 @@ export default {
       navigation: "home",
     };
   },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('logout')
+      window.location.reload()
+    }
+  }
 };
 </script>
 

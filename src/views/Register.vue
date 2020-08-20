@@ -25,24 +25,26 @@
               </b-field> 
               -->
               <b-field>
-                <b-input type="text" placeholder="Nombre/s" v-model="user.first_name"></b-input>
+                <b-input type="text" placeholder="Nombre(s)" v-model="user.first_name"></b-input>
               </b-field>
 
               <b-field>
-                <b-input type="text" placeholder="Apellido/s" v-model="user.last_name"></b-input>
+                <b-input type="text" placeholder="Apellido(s)" v-model="user.last_name"></b-input>
               </b-field>
 
-              <b-field type="is-success" message="La matricula esta disponible">
+              <b-field type="text" :isValid="false">
                 <b-input
                   type="text"
                   placeholder="Matricula"
-                  maxlength="30"
+                  use-html5-validation
+                  required
+                  validation-message="La matricula esta disponible"
                   v-model="user.enrollment"
                 ></b-input>
               </b-field>
 
-              <b-field type="is-danger" message="El correo es invalido">
-                <b-input type="email" placeholder="Correo" maxlength="30" v-model="user.email"></b-input>
+              <b-field type="text" >
+                <b-input type="email" pattern="(E|e|le|LE)[0-9]+@((itmerida[.]edu[.]mx)|(merida[.]tecnm[.]mx))" validation-message="El correo es inválido" placeholder="Correo"  v-model="user.email"></b-input>
               </b-field>
 
               <b-field>
