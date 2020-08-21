@@ -87,7 +87,7 @@
               <!---->
             </header>
             <div class="card-content">
-              <form>
+              <section>
                 <div>
                   <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
                     <div class="field is-horizontal">
@@ -276,7 +276,7 @@
                     </div>
                   </ValidationObserver>
                 </div>
-              </form>
+              </section>
             </div>
           </div>
         </template>
