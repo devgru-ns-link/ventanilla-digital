@@ -45,30 +45,25 @@
 
                 <b-field type="text" :isValid="false">
                   <BInputWithValidation
-                    rules="required"
+                    rules="required|matricula"
                     type="text"
                     placeholder="Matricula"
-                    use-html5-validation
-                    required
-                    validation-message="La matricula esta disponible"
                     v-model="user.enrollment"
                   />
                 </b-field>
 
                 <b-field>
                   <BInputWithValidation
-                    rules="required|email"
+                    rules="required|email|email-edu"
                     type="email"
                     v-model="user.email"
-                    pattern="(E|e|le|LE)[0-9]+@((itmerida[.]edu[.]mx)|(merida[.]tecnm[.]mx))"
-                    validation-message="El correo es inválido"
-                    placeholder="Correo"
+                    placeholder="Correo institucional"
                   />
                 </b-field>
 
                 <b-field>
                   <BInputWithValidation
-                    rules="required"
+                    rules="required|length:8"
                     type="password"
                     placeholder="Contraseña"
                     password-reveal
@@ -183,17 +178,6 @@ export default {
         ariaModal: true,
       });
       await this.$router.push("/home"); //Redireccionamiento con codigo
-    },
-
-    resetForm() {
-      this.email = "";
-      this.password = "";
-      this.confirmation = "";
-      this.subject = "";
-      this.choices = [];
-      requestAnimationFrame(() => {
-        this.$refs.observer.reset();
-      });
     },
   },
 };

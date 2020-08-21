@@ -30,10 +30,12 @@
                     class="input"
                     type="password"
                     placeholder="Contraseña"
+                    password-reveal
                     v-model="user.password"
                   />
                 </div>
               </div>
+              
               <div class="field">
                 <label class="checkbox">
                   <input type="checkbox" />

@@ -2,7 +2,7 @@
   <nav class="navbar is-white topNav">
     <div class="container">
       <div class="navbar-brand">
-        <a class="navbar-item" href="">
+        <a class="navbar-item" href>
           <img src="logo_self_service2.png" alt="ITM" />
         </a>
         <div class="navbar-burger burger" data-target="topNav">
@@ -33,7 +33,7 @@
                   <span>Login</span>
                 </a>
               </p>
-            </div> -->
+            </div>-->
             <template v-if="$store.state.isLogued">
               <!-- <div class="navbar-item">
                 <div class="control has-icons-left">
@@ -41,12 +41,85 @@
                     <input type="search" name="nombre" placeholder="Buscar" />
                   </form>
                 </div>
-              </div> -->
-
-              <a class="navbar-item">
-                <i class="material-icons">notifications</i>
-                <small class="badge">3</small>
-              </a>
+              </div> 
+              
+              <div class="card-table">
+                                <div class="content">
+                                    <table class="table is-fullwidth is-striped">
+                                        <tbody>
+                                            <tr>
+                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
+                                                <td>Lorum ipsum dolem aire</td>
+                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
+                                                <td>Lorum ipsum dolem aire</td>
+                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
+                                                <td>Lorum ipsum dolem aire</td>
+                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
+                                                <td>Lorum ipsum dolem aire</td>
+                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
+                                                <td>Lorum ipsum dolem aire</td>
+                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
+                                                <td>Lorum ipsum dolem aire</td>
+                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
+                                                <td>Lorum ipsum dolem aire</td>
+                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
+                                                <td>Lorum ipsum dolem aire</td>
+                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
+                                                <td>Lorum ipsum dolem aire</td>
+                                                <td class="level-right"><a class="button is-small is-primary" href="#">Action</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+              </div>-->
+              <b-dropdown
+                v-model="navigation"
+                position="is-bottom-left"
+                append-to-body
+                aria-role="menu"
+              >
+                <a class="navbar-item" slot="trigger" role="button">
+                  <i class="material-icons">notifications</i>
+                  <small class="badge">3</small>
+                </a>
+                <b-dropdown-item has-link value="blog" aria-role="menuitem">
+                  <div class="card-table">
+                    <div class="content">
+                      <table class="table is-fullwidth is-striped">
+                          <div v-for="i in 3" :key="i">
+                              <router-link tag="a" to="/about">
+                                <b-icon size="is-small" icon="bell"></b-icon>&nbsp;Su solicitud No.{{ i }} ha sido aprobada. 
+                              </router-link>
+                          </div>
+                      </table>
+                    </div>
+                  </div>
+                </b-dropdown-item>
+              </b-dropdown>
               <b-dropdown
                 v-model="navigation"
                 position="is-bottom-left"
@@ -66,7 +139,7 @@
                   <router-link tag="a" to="/home">
                     <b-icon size="is-small" icon="home"></b-icon>Inicio
                   </router-link>
-                </b-dropdown-item> -->
+                </b-dropdown-item>-->
                 <b-dropdown-item has-link value="blog" aria-role="menuitem">
                   <router-link tag="a" to="/about">
                     <b-icon size="is-small" icon="book-open"></b-icon>&nbsp; Mis
@@ -75,18 +148,13 @@
                 </b-dropdown-item>
                 <b-dropdown-item has-link value="settings">
                   <router-link tag="a" to="/about">
-                    <b-icon size="is-small" icon="cog"></b-icon
-                    >&nbsp;Configuración
+                    <b-icon size="is-small" icon="cog"></b-icon>&nbsp;Configuración
                   </router-link>
                 </b-dropdown-item>
 
                 <hr class="dropdown-divider" aria-role="menuitem" />
 
-                <b-dropdown-item
-                  @click="logout"
-                  value="logout"
-                  aria-role="menuitem"
-                >
+                <b-dropdown-item @click="logout" value="logout" aria-role="menuitem">
                   <b-icon size="is-small" icon="logout"></b-icon>&nbsp;Cerrar
                   sesión
                 </b-dropdown-item>
@@ -96,9 +164,7 @@
               <router-link tag="a" to="/register" class="button is-primary">
                 <strong>Sign up</strong>
               </router-link>
-              <router-link tag="a" to="/login" class="button is-light"
-                >Log in</router-link
-              >
+              <router-link tag="a" to="/login" class="button is-light">Log in</router-link>
             </div>
           </div>
         </div>
@@ -109,35 +175,35 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      navigation: 'home'
-    }
+      navigation: "home",
+    };
   },
-  mounted () {
-    var burger = document.querySelector('.burger')
-    var menu = document.querySelector('#' + burger.dataset.target)
-    burger.addEventListener('click', function () {
-      burger.classList.toggle('is-active')
-      menu.classList.toggle('is-active')
-    })
+  mounted() {
+    var burger = document.querySelector(".burger");
+    var menu = document.querySelector("#" + burger.dataset.target);
+    burger.addEventListener("click", function () {
+      burger.classList.toggle("is-active");
+      menu.classList.toggle("is-active");
+    });
   },
   methods: {
-    async logout () {
-      await this.$store.dispatch('logout')
-      window.location.reload()
-    }
-  }
-}
+    async logout() {
+      await this.$store.dispatch("logout");
+      window.location.reload();
+    },
+  },
+};
 </script>
 
 <style scoped>
 /*Inicia search*/
 
-input[type='search'] {
+input[type="search"] {
   width: 45px; /*ancho por defecto*/
   background: #ededed
-    url('https://antocas.com/demos/search-css3/search-icon.png') no-repeat 9px
+    url("https://antocas.com/demos/search-css3/search-icon.png") no-repeat 9px
     center; /*icono lupa*/
   padding: 9px 10px 9px 32px;
   border-radius: 15em;
@@ -147,7 +213,7 @@ input[type='search'] {
   transition: all 0.5s; /* transición de .5seg a todos los elementos*/
   outline: none; /* ocultar el fucos automático de los input */
 }
-input[type='search']:focus {
+input[type="search"]:focus {
   width: 230px; /*tamaño del boton buscar al hacer click*/
   padding-left: 32px; /*espacio entre el icono lupa y el placeholder*/
   color: #000;

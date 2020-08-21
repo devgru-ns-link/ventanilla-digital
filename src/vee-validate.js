@@ -18,5 +18,21 @@ extend("confirmed", {
 
 extend("length", {
   ...length,
-  message: "This field must have 2 options"
+  message: "Ingrese al menos 8 caracteres"
 });
+
+extend('email-edu', value => {
+  return /(E|e|le|LE)[0-9]+@((itmerida[.]edu[.]mx)|(merida[.]tecnm[.]mx))/.test(
+    value
+  )
+    ? true
+    : 'Este email no es institucional'
+})
+
+extend('matricula', value => {
+  return /(E|LE)+[0-9]*8/.test(
+    value
+  )
+    ? true
+    : 'La matrícula debe tener el formato E12345678'
+})
