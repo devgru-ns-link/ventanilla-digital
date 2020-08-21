@@ -16,7 +16,9 @@
             </figure>
             <div class="media-content">
               <div class="content">
-                <h1 class="title is-3">{{ user.first_name }} {{ user.last_name }}</h1>
+                <h1 class="title is-3">
+                  {{ user.first_name }} {{ user.last_name }}
+                </h1>
                 <p class="subtitle is-5">Instituto Tecnológico de Mérida</p>
 
                 <ul>
@@ -34,18 +36,21 @@
     <section class="section">
       <div class="container">
         <h2 class="title">Mis solicitudes</h2>
-        <b-message type="is-warning" has-icon>An n has alzad algn tamt slctd</b-message>
-        <b-message type="is-info" has-icon>Ts slctds y tamts aacan a dnd das v s stad</b-message>
-
-        <router-link
-          tag="a"
-          to="/form"
-          class="button is-primary"
-          size="is-large is-primary"
-          icon-right="arrow-right"
+        <b-message type="is-warning" has-icon
+          >An n has alzad algn tamt slctd</b-message
         >
-          <strong>Nuevo trámite</strong>
-        </router-link>
+        <b-message type="is-info" has-icon
+          ><p>
+            ¡Hola!, en esta sección podrás realizar los trámites escolares que
+            necesites, solamente debes seleccionar el trámite, llenar los
+            requerimientos y darle al botón de solicitar,
+            <b>¡Así de fácil!</b>
+          </p>
+        </b-message>
+        
+        
+
+        <Modal/>
 
         <div class="columns is-centered is-multiline is-mobile">
           <div v-for="i in 10" :key="i" class="column is-one-quarter-desktop">
@@ -81,11 +86,14 @@
                 </div>
               </div>
               <footer class="card-footer">
-                <a href="templates/admin.html" class="card-footer-item">Preview</a>
+                <a href="templates/admin.html" class="card-footer-item"
+                  >Preview</a
+                >
                 <a
                   href="https://github.com/BulmaTemplates/bulma-templates/blob/master/templates/admin.html"
                   class="card-footer-item"
-                >Source Code</a>
+                  >Source Code</a
+                >
               </footer>
             </div>
           </div>
@@ -96,13 +104,16 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 export default {
-  async created() {
-    await this.$store.dispatch("getStudent");
+  async created () {
+    await this.$store.dispatch('getStudent')
+  },
+  components: {
+    Modal: () => import('./Modal')
   },
   computed: {
-    ...mapState(["user", "student"]),
-  },
-};
+    ...mapState(['user', 'student'])
+  }
+}
 </script>

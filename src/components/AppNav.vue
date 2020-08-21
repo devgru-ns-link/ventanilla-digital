@@ -96,6 +96,10 @@
                                     </table>
                                 </div>
               </div>-->
+              <a class="navbar-item" slot="trigger" role="button">
+                <i class="material-icons">border_all</i>
+              </a>
+
               <b-dropdown
                 v-model="navigation"
                 position="is-bottom-left"
@@ -110,14 +114,40 @@
                   <div class="card-table">
                     <div class="content">
                       <table class="table is-fullwidth is-striped">
-                          <div v-for="i in 3" :key="i">
-                              <router-link tag="a" to="/about">
-                                <b-icon size="is-small" icon="bell"></b-icon>&nbsp;Su solicitud No.{{ i }} ha sido aprobada. 
-                              </router-link>
-                          </div>
+                        <div v-for="i in 3" :key="i">
+                          <router-link tag="a" to="/about">
+                            <article class="media">
+                              <div class="media-content">
+                                <div class="content">
+                                  <p>
+                                    Et quam aut aperiam expedita eos sit....
+                                  </p>
+                                </div>
+                                <nav class="level is-mobile">
+                                  <div class="level-left">
+                                    <div class="level-item">
+                                      <span class="tag is-small is-danger"
+                                        ><span class="icon is-small"
+                                          ><i
+                                            class="mdi mdi-bell"
+                                          ></i></span
+                                      ></span>
+                                    </div>
+                                    <div class="level-item">
+                                      <small>2 weeks ago</small>
+                                    </div>
+                                  </div>
+                                </nav>
+                              </div>
+                            </article>
+                          </router-link>
+                        </div>
                       </table>
                     </div>
                   </div>
+                  <footer class="card-footer is-centered">
+                    <a href="#" class="card-footer-item">View All</a>
+                  </footer>
                 </b-dropdown-item>
               </b-dropdown>
               <b-dropdown
@@ -148,13 +178,18 @@
                 </b-dropdown-item>
                 <b-dropdown-item has-link value="settings">
                   <router-link tag="a" to="/about">
-                    <b-icon size="is-small" icon="cog"></b-icon>&nbsp;Configuración
+                    <b-icon size="is-small" icon="cog"></b-icon
+                    >&nbsp;Configuración
                   </router-link>
                 </b-dropdown-item>
 
                 <hr class="dropdown-divider" aria-role="menuitem" />
 
-                <b-dropdown-item @click="logout" value="logout" aria-role="menuitem">
+                <b-dropdown-item
+                  @click="logout"
+                  value="logout"
+                  aria-role="menuitem"
+                >
                   <b-icon size="is-small" icon="logout"></b-icon>&nbsp;Cerrar
                   sesión
                 </b-dropdown-item>
@@ -164,7 +199,9 @@
               <router-link tag="a" to="/register" class="button is-primary">
                 <strong>Sign up</strong>
               </router-link>
-              <router-link tag="a" to="/login" class="button is-light">Log in</router-link>
+              <router-link tag="a" to="/login" class="button is-light"
+                >Log in</router-link
+              >
             </div>
           </div>
         </div>
@@ -175,35 +212,35 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      navigation: "home",
-    };
+      navigation: 'home'
+    }
   },
-  mounted() {
-    var burger = document.querySelector(".burger");
-    var menu = document.querySelector("#" + burger.dataset.target);
-    burger.addEventListener("click", function () {
-      burger.classList.toggle("is-active");
-      menu.classList.toggle("is-active");
-    });
+  mounted () {
+    var burger = document.querySelector('.burger')
+    var menu = document.querySelector('#' + burger.dataset.target)
+    burger.addEventListener('click', function () {
+      burger.classList.toggle('is-active')
+      menu.classList.toggle('is-active')
+    })
   },
   methods: {
-    async logout() {
-      await this.$store.dispatch("logout");
-      window.location.reload();
-    },
-  },
-};
+    async logout () {
+      await this.$store.dispatch('logout')
+      window.location.reload()
+    }
+  }
+}
 </script>
 
 <style scoped>
 /*Inicia search*/
 
-input[type="search"] {
+input[type='search'] {
   width: 45px; /*ancho por defecto*/
   background: #ededed
-    url("https://antocas.com/demos/search-css3/search-icon.png") no-repeat 9px
+    url('https://antocas.com/demos/search-css3/search-icon.png') no-repeat 9px
     center; /*icono lupa*/
   padding: 9px 10px 9px 32px;
   border-radius: 15em;
@@ -213,7 +250,7 @@ input[type="search"] {
   transition: all 0.5s; /* transición de .5seg a todos los elementos*/
   outline: none; /* ocultar el fucos automático de los input */
 }
-input[type="search"]:focus {
+input[type='search']:focus {
   width: 230px; /*tamaño del boton buscar al hacer click*/
   padding-left: 32px; /*espacio entre el icono lupa y el placeholder*/
   color: #000;

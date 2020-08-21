@@ -5,6 +5,7 @@ import store from './store'
 import Buefy from 'buefy'
 // import 'buefy/dist/buefy.css'
 import "./vee-validate";
+import 'bulma-floating-button/dist/css/bulma-floating-button.min.css'
 
 Vue.use(Buefy)
 
