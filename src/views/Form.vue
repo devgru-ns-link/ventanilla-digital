@@ -259,6 +259,63 @@
 </template>
 
 <script>
+import { ValidationObserver } from "vee-validate";
+import BSelectWithValidation from "@/components/inputs/BSelectWithValidation";
+import BInputWithValidation from "@/components/inputs/BInputWithValidation";
+import BCheckboxesWithValidation from "@/components/inputs/BCheckboxesWithValidation";
+
+export default {
+  components: {
+    ValidationObserver,
+    BSelectWithValidation,
+    BInputWithValidation,
+    BCheckboxesWithValidation,
+  },
+
+  data() {
+    return {
+      selected: "",
+      tramite: "",
+      number: 1,
+      numberPlaceholder: undefined,
+      loginType: "username",
+
+      email: "",
+      password: "",
+      confirmation: "",
+      subject: "",
+      subject2: "",
+      file: null,
+      choices: [],
+    };
+  },
+
+  methods: {
+    toggleLoginType: function () {
+      return (this.loginType =
+        this.loginType === "matricula" ? "editar" : "matricula");
+    },
+    submit() {
+      this.$buefy.toast.open({
+        message: "Su solicitud ha sido enviada",
+        type: "is-success",
+      });
+    },
+    resetForm() {
+      this.email = "";
+      this.password = "";
+      this.confirmation = "";
+      this.subject = "";
+      this.subject2 = "";
+      this.file = null;
+      this.choices = [];
+      requestAnimationFrame(() => {
+        this.$refs.observer.reset();
+      });
+    },
+  },
+};
+
 !(function () {
   var e = document,
     t = e.createElement('script')
