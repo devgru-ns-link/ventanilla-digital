@@ -13,18 +13,18 @@ export default new Vuex.Store({
     student: {}
   },
   mutations: {
-    SET_LOGIN(state, value) {
+    SET_LOGIN (state, value) {
       state.isLogued = value
     },
-    SET_USER(state, value) {
+    SET_USER (state, value) {
       state.user = value
     },
-    SET_STUDENT(state, value) {
+    SET_STUDENT (state, value) {
       state.student = value
     }
   },
   actions: {
-    login({ commit }, data) {
+    login ({ commit }, data) {
       return new Promise(async (resolve, reject) => {
         try {
           const res = await login(data)
@@ -37,27 +37,30 @@ export default new Vuex.Store({
       })
     },
     // user logout
-    logout() {
+    logout () {
       return new Promise((resolve, reject) => {
         removeToken()
         resolve()
       })
     },
-    verifyToken({ commit }) {
+    verifyToken ({ commit }) {
       return new Promise(async (resolve, reject) => {
         let Token = getToken()
         Token = decodeToken(Token)
-        console.log(Token)
         if (Token) {
-          const data = await getUserInfo(Token.id)
-          console.log(data)
-          commit('SET_LOGIN', true)
-          commit('SET_USER', data)
+          try {
+            const data = await getUserInfo(Token.id)
+            console.log(data)
+            commit('SET_LOGIN', true)
+            commit('SET_USER', data)
+            resolve()
+          } catch (error) {
+            reject()
+          }
         }
-        resolve(Token)
       })
     },
-    getStudent({ commit, state }) {
+    getStudent ({ commit, state }) {
       return new Promise(async (resolve, reject) => {
         try {
           const data = await getStudentInfo(state.user.enrrollment)

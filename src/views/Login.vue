@@ -19,7 +19,6 @@
                     class="input"
                     type="text"
                     placeholder="Matrícula"
-                    autofocus
                     v-model="user.enrollment"
                   />
                 </div>
@@ -43,7 +42,7 @@
               </div>
               <button
                 class="button is-block is-info is-large is-fullwidth"
-                :class=" {'is-loading': isLoading}"
+                :class="{ 'is-loading': isLoading }"
                 @click.prevent="submit"
               >
                 Iniciar sesión
@@ -64,12 +63,9 @@
 </template>
 
 <script>
+import redirect from '../mixins/redirect'
 export default {
-  created () {
-    if (this.$store.state.isLogued) {
-      this.$router.push('/home')
-    }
-  },
+  mixins: [redirect],
   data () {
     return {
       user: {
@@ -97,8 +93,7 @@ export default {
       this.isLoading = true
       try {
         await this.$store.dispatch('login', this.user)
-        await this.$store.dispatch('verifyToken', this.user)
-        this.$router.push('/home') //Redireccionamiento con codigo
+        this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
       } catch (error) {
         this.alertCustomError()
       } finally {

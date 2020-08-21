@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import store from '@/store'
+import { getToken } from '../plugins/cookies'
 
 Vue.use(VueRouter)
 
@@ -38,11 +40,50 @@ const routes = [
     name: 'EmailVerification',
     component: () => import('../views/EmailVerification.vue')
   }
-  
 ]
 
-const router = new VueRouter({
-  routes
+const createRouter = () =>
+  new VueRouter({
+    // mode: 'history', // require service support
+    scrollBehavior: () => ({ y: 0 }),
+    routes
+  })
+
+const router = createRouter()
+
+const whiteList = ['/home', '/login', '/verify-user', '/register'] // no redirect whitelist
+
+router.beforeEach(async (to, from, next) => {
+  // determine whether the user has logged in
+  const hasToken = getToken()
+
+  if (hasToken) {
+    if (to.path === '/login') {
+      // if is logged in, redirect to the home page
+      next({ path: '/' })
+    } else {
+      // determine whether the user has obtained his permission roles through getInfo
+      try {
+        // get user info
+        await store.dispatch('verifyToken')
+        next()
+      } catch (error) {
+        // remove token and go to login page to re-login
+        await store.dispatch('logout')
+        next(`/login?redirect=${to.path}`)
+      }
+    }
+  } else {
+    /* has no token */
+
+    if (whiteList.indexOf(to.path) !== -1) {
+      // in the free login whitelist, go directly
+      next()
+    } else {
+      // other pages that do not have permission to access are redirected to the login page.
+      next(`/login?redirect=${to.path}`)
+    }
+  }
 })
 
 export default router
