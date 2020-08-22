@@ -4,8 +4,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-window/LogoTec.png"
   },
   {
-    "revision": "e7b6245d61f33a4e7182",
-    "url": "/digital-window/css/app.53204f61.css"
+    "revision": "a2248c9283a826b9f1ce",
+    "url": "/digital-window/css/app.eee8f622.css"
   },
   {
     "revision": "f4767ae1202a0b312290",
@@ -64,12 +64,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-window/img/seguimiento.jpg"
   },
   {
-    "revision": "16def463bab1fa30beb36fc3562b8dc6",
+    "revision": "cd7218bf0c63baf656dac3ab0d234c9c",
     "url": "/digital-window/index.html"
   },
   {
-    "revision": "e7b6245d61f33a4e7182",
-    "url": "/digital-window/js/app.af4c2a03.js"
+    "revision": "a2248c9283a826b9f1ce",
+    "url": "/digital-window/js/app.d01d4cc9.js"
   },
   {
     "revision": "0db8b694a8738b91ff2e",
