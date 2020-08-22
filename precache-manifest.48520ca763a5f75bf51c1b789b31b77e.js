@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "dc64e67e88169f634692",
-    "url": "/digital-window/css/app.050f2686.css"
+    "revision": "714a052ec6919c2a036c",
+    "url": "/digital-window/css/app.53204f61.css"
   },
   {
     "revision": "c73daba0ee8af6525475",
@@ -28,28 +28,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-window/css/chunk-vendors.4d846261.css"
   },
   {
-    "revision": "7eb4ee07d5201b9b161d37c8890beb92",
-    "url": "/digital-window/img/Studying-pana.7eb4ee07.svg"
-  },
-  {
-    "revision": "cd4f0a1da69377b65f518f1f1e459e05",
-    "url": "/digital-window/img/estudiante.cd4f0a1d.jpg"
-  },
-  {
-    "revision": "45a9cc88f1929ffa46c3df0746208254",
-    "url": "/digital-window/img/horario.45a9cc88.jpg"
-  },
-  {
-    "revision": "ae8f45fb9041729e26e9f103267edb44",
-    "url": "/digital-window/img/seguimiento.ae8f45fb.jpg"
-  },
-  {
-    "revision": "ae88f2bb3b4c25da011d1f3e3cac62be",
+    "revision": "19ebbd18b94c43c1b900a828d98c6750",
     "url": "/digital-window/index.html"
   },
   {
-    "revision": "dc64e67e88169f634692",
-    "url": "/digital-window/js/app-legacy.1f4b3c58.js"
+    "revision": "714a052ec6919c2a036c",
+    "url": "/digital-window/js/app-legacy.c1180854.js"
   },
   {
     "revision": "c73daba0ee8af6525475",

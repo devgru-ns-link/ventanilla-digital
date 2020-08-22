@@ -4,8 +4,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-window/LogoTec.png"
   },
   {
-    "revision": "8f51749ad83c52fa6906",
-    "url": "/digital-window/css/app.050f2686.css"
+    "revision": "e7b6245d61f33a4e7182",
+    "url": "/digital-window/css/app.53204f61.css"
   },
   {
     "revision": "f4767ae1202a0b312290",
@@ -36,28 +36,40 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-window/dist/service-worker.dev.js"
   },
   {
+    "revision": "ea6ff8da0b51ca193f39637ee81644b2",
+    "url": "/digital-window/img/Constancias.png"
+  },
+  {
     "revision": "7eb4ee07d5201b9b161d37c8890beb92",
-    "url": "/digital-window/img/Studying-pana.7eb4ee07.svg"
+    "url": "/digital-window/img/Studying-pana.svg"
+  },
+  {
+    "revision": "95753a743493776c93b9c27730cd10ff",
+    "url": "/digital-window/img/cabecera1.gif"
   },
   {
     "revision": "cd4f0a1da69377b65f518f1f1e459e05",
-    "url": "/digital-window/img/estudiante.cd4f0a1d.jpg"
+    "url": "/digital-window/img/estudiante.jpg"
   },
   {
     "revision": "45a9cc88f1929ffa46c3df0746208254",
-    "url": "/digital-window/img/horario.45a9cc88.jpg"
+    "url": "/digital-window/img/horario.jpg"
+  },
+  {
+    "revision": "f8639e96726ed1c61533cc02d3a5ef27",
+    "url": "/digital-window/img/laptop.svg"
   },
   {
     "revision": "ae8f45fb9041729e26e9f103267edb44",
-    "url": "/digital-window/img/seguimiento.ae8f45fb.jpg"
+    "url": "/digital-window/img/seguimiento.jpg"
   },
   {
-    "revision": "e462e76b26da9e9f2d6d2ebc282d24dc",
+    "revision": "16def463bab1fa30beb36fc3562b8dc6",
     "url": "/digital-window/index.html"
   },
   {
-    "revision": "8f51749ad83c52fa6906",
-    "url": "/digital-window/js/app.65cfac42.js"
+    "revision": "e7b6245d61f33a4e7182",
+    "url": "/digital-window/js/app.af4c2a03.js"
   },
   {
     "revision": "0db8b694a8738b91ff2e",
