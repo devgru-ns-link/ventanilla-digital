@@ -96,7 +96,7 @@
                                     </table>
                                 </div>
               </div>-->
-              <a class="navbar-item" slot="trigger" role="button">
+              <a class="navbar-item" slot="trigger" role="button" @click="show_form(true)">
                 <i class="material-icons">border_all</i>
               </a>
 
@@ -229,6 +229,9 @@ export default {
     async logout () {
       await this.$store.dispatch('logout')
       window.location.reload()
+    },
+    show_form(value) {
+      this.$store.commit('SHOW_FORM', value)
     }
   }
 }

@@ -1,13 +1,14 @@
 <template>
   <section>
     <a
-      @click="isComponentModalActive = true"
+      @click="show_form(true)"
       class="button is-floating is-primary"
+      v-show="$store.state.isLogued"
     >
       <b-icon size="is-small" icon="border-all"></b-icon>
     </a>
 
-    <div class="modal" :class="{ 'is-active': isComponentModalActive }">
+    <div class="modal" :class="{ 'is-active': $store.state.isComponentModalActive }">
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
@@ -15,13 +16,13 @@
           <button
             class="delete"
             aria-label="close"
-            @click="isComponentModalActive = false"
+            @click="show_form(false)"
           ></button>
         </header>
         <section class="modal-card-body">
           <section class="container">
             <b-steps>
-              <b-step-item label="Account" icon="account-key"
+              <b-step-item label="Trámite" icon="file-document"
                 ><div class="tile is-ancestor">
                   <div class="tile is-vertical is-12">
                     <div class="tile">
@@ -109,7 +110,6 @@
                   </div>
                 </div>
               </b-step-item>
-
               <b-step-item label="Archivos" icon="account-plus">
                 <label class="label">INE</label>
 
@@ -196,55 +196,16 @@
 </template>
 
 <script>
-const ModalForm = {
-  props: ['email', 'password'],
-  template: `
-            <div class="modal-card" style="width: auto">
-                <header class="modal-card-head">
-                    <p class="modal-card-title">Login</p>
-                </header>
-                <section class="modal-card-body">
-                    <b-field label="Email">
-                        <b-input
-                            type="email"
-                            :value="email"
-                            placeholder="Your email"
-                            required>
-                        </b-input>
-                    </b-field>
-
-                    <b-field label="Password">
-                        <b-input
-                            type="password"
-                            :value="password"
-                            password-reveal
-                            placeholder="Your password"
-                            required>
-                        </b-input>
-                    </b-field>
-
-                    <b-checkbox>Remember me</b-checkbox>
-                </section>
-                <footer class="modal-card-foot">
-                    <button class="button" type="button" @click="$parent.close()">Close</button>
-                    <button class="button is-primary">Login</button>
-                </footer>
-            </div>
-        `
-}
 
 export default {
-  components: {
-    ModalForm
-  },
   data () {
     return {
       file: null,
-      isComponentModalActive: true,
-      formProps: {
-        email: 'evan@you.com',
-        password: 'testing'
-      }
+    }
+  },
+  methods: {
+    show_form(value) {
+      this.$store.commit('SHOW_FORM', value)
     }
   }
 }

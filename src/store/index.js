@@ -10,7 +10,8 @@ export default new Vuex.Store({
   state: {
     isLogued: false,
     user: {},
-    student: {}
+    student: {},
+    isComponentModalActive: false,
   },
   mutations: {
     SET_LOGIN (state, value) {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     SET_STUDENT (state, value) {
       state.student = value
+    },
+    SHOW_FORM (state, value) {
+      state.isComponentModalActive = value
     }
   },
   actions: {
