@@ -5,7 +5,9 @@
         <div class="columns">
           <div class="column left is-hidden-touch">
             <h1 class="title is-1">Ventanilla Digital</h1>
-            <h2 class="subtitle colored is-4">Trámites electronicos para el ITM.</h2>
+            <h2 class="subtitle colored is-4">
+              Trámites electronicos para el ITM.
+            </h2>
             <p>
               Esta es una plataforma para solicitar a distancia los trámites de
               control escolar y ayudar contra el
@@ -15,7 +17,9 @@
           <div class="column right">
             <div class="has-text-centered">
               <h1 class="title is-4">Registrate ahora!</h1>
-              <p class="description">El usuario es necesario para acceder a los tramites en linea</p>
+              <p class="description">
+                El usuario es necesario para acceder a los tramites en linea
+              </p>
             </div>
 
             <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
@@ -63,7 +67,7 @@
 
                 <b-field>
                   <BInputWithValidation
-                    rules="required|length:8"
+                    rules="required|length"
                     type="password"
                     placeholder="Contraseña"
                     password-reveal
@@ -82,7 +86,13 @@
                     v-model="user.password_confirm"
                   />
                 </b-field>
-                <button class="button is-block is-primary is-fullwidth" @click.prevent="signup, handleSubmit(submit)">Registrarse</button>
+                <button
+                  class="button is-block is-primary is-fullwidth"
+                  :class="{ 'is-loading': isLoading }"
+                  @click.prevent="signup, handleSubmit(signup)"
+                >
+                  Registrarse
+                </button>
                 <br />
                 <small>
                   <em>¿Ya tienes una cuenta?</em>
@@ -121,7 +131,7 @@
           </div>
           <div class="level-right">
             <small class="level-item" style="color: var(--textLight)">
-              &copy; Instituto Tecnologico de Merida. Todos los derechos
+              &copy; Instituto Tecnológico de Mérida. Todos los derechos
               reservados.
             </small>
           </div>
@@ -132,55 +142,71 @@
 </template>
 
 <script>
-import { register } from "@/api/users";
-import { ValidationObserver } from "vee-validate";
-import BSelectWithValidation from "@/components/inputs/BSelectWithValidation";
-import BInputWithValidation from "@/components/inputs/BInputWithValidation";
-import BCheckboxesWithValidation from "@/components/inputs/BCheckboxesWithValidation";
+import { register } from '@/api/users'
+import { ValidationObserver } from 'vee-validate'
+import BSelectWithValidation from '@/components/inputs/BSelectWithValidation'
+import BInputWithValidation from '@/components/inputs/BInputWithValidation'
+import BCheckboxesWithValidation from '@/components/inputs/BCheckboxesWithValidation'
 
 export default {
   components: {
     ValidationObserver,
     BSelectWithValidation,
     BInputWithValidation,
-    BCheckboxesWithValidation,
+    BCheckboxesWithValidation
   },
-  data() {
+  data () {
     return {
       user: {
-        first_name: "",
-        last_name: "",
-        enrollment: "",
-        email: "",
-        password: "",
-        password_confirm: "",
+        first_name: '',
+        last_name: '',
+        enrollment: '',
+        email: '',
+        password: '',
+        password_confirm: ''
       },
-      email: "",
-      password: "",
-      confirmation: "",
-      subject: "",
-      choices: [],
-    };
+      isLoading: false
+    }
   },
 
   methods: {
-    async signup() {
-      const res = await register(this.user);
-      console.log(res);
+    alertCustomError () {
       this.$buefy.dialog.alert({
-        title: "¡Ya casi!",
-        message: "Por favor checa tu correo para confirmar tu cuenta",
-        type: "is-success",
+        title: 'Error',
+        message:
+          "Something's not good but I have a custom <b>icon</b> and <b>type</b>",
+        type: 'is-danger',
         hasIcon: true,
-        icon: "check-circle",
-        iconPack: "fa",
-        ariaRole: "alertdialog",
-        ariaModal: true,
-      });
-      await this.$router.push("/home"); //Redireccionamiento con codigo
+        icon: 'times-circle',
+        iconPack: 'fa',
+        ariaRole: 'alertdialog',
+        ariaModal: true
+      })
     },
-  },
-};
+    async signup () {
+      this.isLoading = true
+      try {
+        const res = await register(this.user)
+        console.log(res)
+        this.$buefy.dialog.alert({
+          title: '¡Ya casi!',
+          message: 'Por favor checa tu correo para confirmar tu cuenta',
+          type: 'is-success',
+          hasIcon: true,
+          icon: 'check-circle',
+          iconPack: 'fa',
+          ariaRole: 'alertdialog',
+          ariaModal: true
+        })
+        await this.$router.push('/home') //Redireccionamiento con codigo
+      } catch (error) {
+        this.alertCustomError()
+      } finally {
+        this.isLoading = false
+      }
+    }
+  }
+}
 </script>
 
 <style>
