@@ -108,7 +108,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-window/logo_self_service2.png"
   },
   {
-    "revision": "35c4004641245895dfccdaf434b1f459",
+    "revision": "f1bc62ec0a09b68fd84b36ead5350c41",
     "url": "/digital-window/manifest.json"
   },
   {
