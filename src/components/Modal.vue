@@ -25,7 +25,7 @@
                       <div class="tile is-parent is-vertical">
                         <article
                           class="tile is-child notification is-primary"
-                          @click="activeStep = 1, option = 'constancia'"
+                          @click="activeStep = 1, option = 'CONSTANCIA'"
                         >
                           <p class="title is-5">Constancia de estudios</p>
                           <p class="subtitle is-6">Normal, con promedio, SITUR</p>
@@ -41,7 +41,7 @@
                       <div class="tile is-parent is-vertical">
                         <article
                           class="tile is-child notification is-primary"
-                          @click="activeStep = 1, option = 'imms'"
+                          @click="activeStep = 1, option = 'IMMS'"
                         >
                           <p class="title is-5">Alta/Baja IMSS</p>
                           <p class="subtitle is-6">Requiere NSS</p>
@@ -62,7 +62,7 @@
                 <div class="columns">
                   <div class="column is-12">
                     <div>
-                      <b-field label="Tipo de constancia" v-if="option == 'constancia'">
+                      <b-field label="Tipo de constancia" v-if="option == 'CONSTANCIA'">
                         <b-select
                           placeholder="Selecciona un tipo de constancia"
                           size="is-medium-small"
@@ -74,7 +74,7 @@
                         </b-select>
                       </b-field>
 
-                      <template v-if="option == 'imms'">
+                      <template v-if="option == 'IMMS'">
                         <b-field label="Tipo de solicitud">
                           <b-select size="is-medium-small" expanded v-model="tramite">
                             <option
@@ -100,7 +100,7 @@
                           <label class="label">CURP</label>
                           <div class="control">
                             <input class="input" type="text" placeholder="CURP" />
-                            <a href="https://www.gob.mx/curp/" class="is-8">Consulta CURP</a>
+                            <a href="https://www.gob.mx/curp/" target="_blank" class="is-8">Consulta CURP</a>
                           </div>
                         </div>
                       </template>
@@ -170,7 +170,7 @@
                     </b-upload>
                   </b-field>
 
-                  <template v-if="option == 'constancia'">
+                  <template v-if="option == 'CONSTANCIA'">
                     <label class="label">Foto infantil</label>
                     <b-field class="file is-primary" :class="{ 'has-name': !!file }">
                       <b-upload v-model="file" class="file-label">
@@ -207,9 +207,9 @@
                     @click="confirmCustom"
                     size="is-large"
                     expanded
-                  >¡Listo!</b-button>
+                  >¡Terminar y enviar!</b-button>
                   <b-button
-                    v-else-if="activeStep !=0"
+                    v-else-if="activeStep !== 0"
                     type="is-primary"
                     :disabled="next.disabled"
                     @click.prevent="next.action"
@@ -243,6 +243,9 @@
 
 <script>
 export default {
+  mounted() {
+    this.activeStep = 0
+  },
   data() {
     return {
       file: null,
@@ -260,12 +263,15 @@ export default {
         title: "Revisa que los datos sean correctos",
         message: `Trámite solicitado: ` + this.option,
         cancelText: "Cancelar",
-        confirmText: "Solicitar",
-        type: "is-success",
-        onConfirm: () => this.$buefy.toast.open({
-                    message: '¡Solicitud enviada correctamente!',
-                    type: 'is-success'
-                }),
+        confirmText: "Enviar",
+        type: "is-info",
+        hasIcon: true,
+        iconPack: 'fa',
+        onConfirm: () =>
+          this.$buefy.toast.open({
+            message: "¡Solicitud enviada correctamente!",
+            type: "is-success",
+          }),
       });
     },
   },
