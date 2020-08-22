@@ -12,7 +12,7 @@ workbox.routing.registerRoute(/\.(?:png|gif|jpg|jpeg|svg)$/, workbox.strategies.
 
   })]
 }));
-workbox.routing.registerRoute(new RegExp('https://some-fancy-api.com'), workbox.strategies.networkFirst({
+workbox.routing.registerRoute(new RegExp('https://digital-window.herokuapp.com'), workbox.strategies.networkFirst({
   cacheName: 'api'
 }));
 workbox.routing.registerRoute(new RegExp('https://fonts.(?:googleapis|gstatic).com/(.*)'), workbox.strategies.cacheFirst({

@@ -1,4 +1,4 @@
-importScripts("/digital-window/precache-manifest.f7d1ace83ef193c5b74220558ea7a3aa.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/digital-window/precache-manifest.6285cc7c8f62130527f0020eb1113a7c.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 workbox.setConfig({
   debug: false
@@ -20,7 +20,7 @@ workbox.routing.registerRoute(
 )
 
 workbox.routing.registerRoute(
-  new RegExp('https://some-fancy-api.com'),
+  new RegExp('https://digital-window.herokuapp.com'),
   workbox.strategies.networkFirst({
     cacheName: 'api'
   })

@@ -28,7 +28,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-window/css/chunk-vendors.4d846261.css"
   },
   {
-    "revision": "d08c5eb47dceb66f8eb9cd7aee0be1ee",
+    "revision": "bd5d72fd7d1859bb0ccd4c95498f32e8",
     "url": "/digital-window/index.html"
   },
   {
@@ -68,7 +68,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-window/js/chunk-vendors-legacy.389b2f86.js"
   },
   {
-    "revision": "57d537f4af285c5553187787bc0c0788",
+    "revision": "35c4004641245895dfccdaf434b1f459",
     "url": "/digital-window/manifest.json"
   }
 ]);
