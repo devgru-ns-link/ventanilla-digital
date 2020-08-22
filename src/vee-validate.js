@@ -16,9 +16,10 @@ extend("confirmed", {
   message: "Las contraseñas no coinciden"
 });
 
-extend("length", {
-  ...length,
-  message: "Ingrese al menos 8 caracteres"
+extend("length", value => {
+  return value.length >= 8
+  ? true
+  : 'La contraseña debe tener minimo 8 caracteres'
 });
 
 extend('email-edu', value => {
@@ -30,7 +31,7 @@ extend('email-edu', value => {
 })
 
 extend('matricula', value => {
-  return /(E|LE)+[0-9]*8/.test(
+  return /(E|LE)[0-9]{8}/.test(
     value
   )
     ? true
