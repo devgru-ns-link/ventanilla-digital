@@ -37,7 +37,7 @@
       <div class="container">
         <h2 class="title">Mis solicitudes</h2>
         <b-message type="is-warning" has-icon
-          >An n has alzad algn tamt slctd</b-message
+          >Aún no has realizado una solicitud</b-message
         >
         <b-message type="is-info" has-icon
           ><p>
