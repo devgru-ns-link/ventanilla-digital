@@ -47,10 +47,6 @@
             <b>¡Así de fácil!</b>
           </p>
         </b-message>
-        
-        
-
-        <Modal/>
 
         <div class="columns is-centered is-multiline is-mobile">
           <div v-for="i in 10" :key="i" class="column is-one-quarter-desktop">
@@ -108,9 +104,6 @@ import { mapState } from 'vuex'
 export default {
   async created () {
     await this.$store.dispatch('getStudent')
-  },
-  components: {
-    Modal: () => import('./Modal')
   },
   computed: {
     ...mapState(['user', 'student'])

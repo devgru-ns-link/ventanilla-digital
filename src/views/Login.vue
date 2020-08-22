@@ -32,6 +32,7 @@
                     placeholder="Contraseña"
                     password-reveal
                     v-model="user.password"
+                    @keyup.enter="submit"
                   />
                 </div>
               </div>
@@ -53,8 +54,8 @@
             </form>
           </div>
           <p class="has-text-black">
-            ¿N tienes na cuenta?&nbsp;·&nbsp;
-            <router-link tag="a" to="/register">Registrarse</router-link>
+            ¿No tienes una cuenta?&nbsp;·&nbsp;
+            <router-link tag="a" to="/register">Regístrate</router-link>
             <!-- <br />¿Olvidaste tu contraseña? &nbsp;·&nbsp;
             <a href="../">Recuperar contraseña</a> -->
           </p>

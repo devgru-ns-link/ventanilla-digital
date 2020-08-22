@@ -19,7 +19,7 @@
             </div>
 
             <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
-              <form>
+              <form @submit="false">
                 <!-- Como hacer otra barrita
               <b-field> 
                 <b-input type="text" placeholder="Matricula" v-model="user.enrollment"></b-input>
@@ -82,7 +82,7 @@
                     v-model="user.password_confirm"
                   />
                 </b-field>
-                <button class="button is-block is-primary is-fullwidth" @click="signup, handleSubmit(submit)">Registrarse</button>
+                <button class="button is-block is-primary is-fullwidth" @click.prevent="signup, handleSubmit(submit)">Registrarse</button>
                 <br />
                 <small>
                   <em>¿Ya tienes una cuenta?</em>
