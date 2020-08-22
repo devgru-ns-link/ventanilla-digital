@@ -10,25 +10,40 @@ export default new Vuex.Store({
   state: {
     isLogued: false,
     user: {},
-    student: {},
+    student: {
+      "enrollment": "e19080708",
+      "admission": 3,
+      "CURP": "GAME910502HMCLRD00",
+      "NSS": "21079101680",
+      "career": "isc",
+      "specialty": "n/a"
+    },
+    schoolRequest: {
+      "type": "horario",
+      "status": "",
+      "photo": null,
+      "INE": null,
+      "student": "7e959f58-880f-4596-8fa5-7202d94ed8f4",
+      "user": null
+    },
     isComponentModalActive: false,
   },
   mutations: {
-    SET_LOGIN (state, value) {
+    SET_LOGIN(state, value) {
       state.isLogued = value
     },
-    SET_USER (state, value) {
+    SET_USER(state, value) {
       state.user = value
     },
-    SET_STUDENT (state, value) {
+    SET_STUDENT(state, value) {
       state.student = value
     },
-    SHOW_FORM (state, value) {
+    SHOW_FORM(state, value) {
       state.isComponentModalActive = value
     }
   },
   actions: {
-    login ({ commit }, data) {
+    login({ commit }, data) {
       return new Promise(async (resolve, reject) => {
         try {
           const res = await login(data)
@@ -41,13 +56,13 @@ export default new Vuex.Store({
       })
     },
     // user logout
-    logout () {
+    logout() {
       return new Promise((resolve, reject) => {
         removeToken()
         resolve()
       })
     },
-    verifyToken ({ commit }) {
+    verifyToken({ commit }) {
       return new Promise(async (resolve, reject) => {
         let Token = getToken()
         Token = decodeToken(Token)
@@ -64,7 +79,7 @@ export default new Vuex.Store({
         }
       })
     },
-    getStudent ({ commit, state }) {
+    getStudent({ commit, state }) {
       return new Promise(async (resolve, reject) => {
         try {
           const data = await getStudentInfo(state.user.enrrollment)
