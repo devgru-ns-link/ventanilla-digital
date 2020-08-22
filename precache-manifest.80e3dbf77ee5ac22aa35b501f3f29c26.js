@@ -84,7 +84,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-window/js/chunk-vendors-legacy.389b2f86.js"
   },
   {
-    "revision": "12b06db6d7dc67a2760cfd24a350e5cc",
+    "revision": "57d537f4af285c5553187787bc0c0788",
     "url": "/digital-window/manifest.json"
   }
 ]);
