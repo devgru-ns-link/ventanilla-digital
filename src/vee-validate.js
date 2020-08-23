@@ -16,7 +16,7 @@ extend("confirmed", {
   message: "Las contraseñas no coinciden"
 });
 
-extend("length", value => {
+extend("len", value => {
   return value.length >= 8
   ? true
   : 'La contraseña debe tener minimo 8 caracteres'

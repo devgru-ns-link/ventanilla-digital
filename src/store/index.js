@@ -19,8 +19,9 @@ export default new Vuex.Store({
       specialty: 'n/a'
     },
     schoolRequest: {
-      type: 'horario',
+      type: '',
       status: '',
+      description: '',
       photo: null,
       INE: null,
       student: '7e959f58-880f-4596-8fa5-7202d94ed8f4',

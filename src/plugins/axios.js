@@ -11,7 +11,7 @@ const service = axios.create({
   baseURL: 'https://digital-window.herokuapp.com/api/v1', // URL
   mode: 'cors',
   credentials: 'same-origin',
-  timeout: 10000
+  timeout: 20000
 })
 
 service.interceptors.request.use(config => {

@@ -67,7 +67,7 @@
 
                 <b-field>
                   <BInputWithValidation
-                    rules="required|length"
+                    rules="required|len"
                     type="password"
                     placeholder="Contraseña"
                     password-reveal
@@ -143,18 +143,8 @@
 
 <script>
 import { register } from '@/api/users'
-import { ValidationObserver } from 'vee-validate'
-import BSelectWithValidation from '@/components/inputs/BSelectWithValidation'
-import BInputWithValidation from '@/components/inputs/BInputWithValidation'
-import BCheckboxesWithValidation from '@/components/inputs/BCheckboxesWithValidation'
 
 export default {
-  components: {
-    ValidationObserver,
-    BSelectWithValidation,
-    BInputWithValidation,
-    BCheckboxesWithValidation
-  },
   data () {
     return {
       user: {
