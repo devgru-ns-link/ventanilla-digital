@@ -205,7 +205,7 @@
                     v-if="activeStep == 3"
                     type="is-primary"
                     @click="confirmCustom"
-                    size="is-large"
+                    size="is-medium"
                     expanded
                   >¡Terminar y enviar!</b-button>
                   <b-button
@@ -213,7 +213,7 @@
                     type="is-primary"
                     :disabled="next.disabled"
                     @click.prevent="next.action"
-                    size="is-large"
+                    size="is-medium"
                     expanded
                   >Siguiente</b-button>
                 </div>

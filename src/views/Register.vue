@@ -170,17 +170,13 @@ export default {
   },
 
   methods: {
-    alertCustomError () {
-      this.$buefy.dialog.alert({
-        title: 'Error',
-        message:
-          "Something's not good but I have a custom <b>icon</b> and <b>type</b>",
+    alertCustomError (error) {
+      this.$buefy.snackbar.open({
+        message: error,
         type: 'is-danger',
-        hasIcon: true,
-        icon: 'times-circle',
-        iconPack: 'fa',
-        ariaRole: 'alertdialog',
-        ariaModal: true
+        position: 'is-bottom-left',
+        actionText: 'OK',
+        queue: false
       })
     },
     async signup () {
@@ -200,7 +196,16 @@ export default {
         })
         await this.$router.push('/home') //Redireccionamiento con codigo
       } catch (error) {
-        this.alertCustomError()
+        console.log(error)
+        if (error.password) {
+          for (const e of error.password) {
+            this.alertCustomError(e)
+          }
+        } else {
+          for (const e of Object.values(error)) {
+            this.alertCustomError(e[0])
+          }
+        }
       } finally {
         this.isLoading = false
       }

@@ -75,21 +75,19 @@ export default {
         enrollment: '',
         password: ''
       },
+      message: '',
       isLoading: false
     }
   },
   methods: {
-    alertCustomError () {
-      this.$buefy.dialog.alert({
-        title: 'Error',
-        message:
-          "Something's not good but I have a custom <b>icon</b> and <b>type</b>",
+    alertCustomError (error) {
+      this.$buefy.snackbar.open({
+        duration: 5000,
+        message: error,
         type: 'is-danger',
-        hasIcon: true,
-        icon: 'times-circle',
-        iconPack: 'fa',
-        ariaRole: 'alertdialog',
-        ariaModal: true
+        position: 'is-bottom-left',
+        actionText: 'OK',
+        queue: false
       })
     },
     async submit () {
@@ -98,7 +96,9 @@ export default {
         await this.$store.dispatch('login', this.user)
         this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
       } catch (error) {
-        this.alertCustomError()
+        if (error.detail) {
+          this.alertCustomError(error.detail)
+        }
       } finally {
         this.isLoading = false
       }
