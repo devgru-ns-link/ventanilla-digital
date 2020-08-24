@@ -159,6 +159,7 @@
                               />
                             </b-field>
                             <a
+                              v-if="schoolRequest.description == 'alta_imms'"
                               href="https://www.gob.mx/curp/"
                               target="_blank"
                               class="is-12"
@@ -173,86 +174,71 @@
               </b-step-item>
               <b-step-item :clickable="false" label="Datos" icon="account">
                 <ValidationObserver ref="form2">
-                  <div class="field">
-                    <label class="label">Nombre(s)</label>
-                    <div class="control">
-                      <input
-                        class="input"
-                        type="text"
-                        v-model="student.first_name"
-                        placeholder="Nombre(s)"
-                      />
-                    </div>
-                  </div>
+                  <b-field label="Nombre(s)">
+                    <BInputWithValidation
+                      rules="required"
+                      v-model="user.first_name"
+                      type="text"
+                      placeholder="Nombre(s)"
+                    />
+                  </b-field>
 
-                  <div class="field">
-                    <label class="label">Apellidos</label>
-                    <div class="control">
-                      <input
-                        class="input"
-                        type="text"
-                        v-model="student.last_name"
-                        placeholder="Apellidos"
-                      />
-                    </div>
-                  </div>
+                  <b-field label="Apellidos">
+                    <BInputWithValidation
+                      rules="required"
+                      v-model="user.last_name"
+                      type="text"
+                      placeholder="Apellidos"
+                    />
+                  </b-field>
 
-                  <div class="field">
-                    <label class="label">Matrícula</label>
-                    <div class="control">
-                      <input
-                        class="input"
-                        type="text"
-                        v-model="student.enrollment"
-                        placeholder="Matrícula"
-                      />
-                    </div>
-                  </div>
+                  <b-field label="Matrícula">
+                    <BInputWithValidation
+                      rules="required|matricula"
+                      v-model="student.enrollment"
+                      type="text"
+                      placeholder="Matrícula"
+                    />
+                  </b-field>
 
-                  <div class="field">
-                    <b-field label="Carrera">
-                      <b-select
-                        placeholder="Selecciona tu carrera"
-                        size="is-small-medium"
-                        v-model="student.career"
-                        expanded
+                  <b-field label="Carrera">
+                    <BSelectWithValidation
+                      rules="required"
+                      v-model="student.career"
+                      size="is-small-medium"
+                      placeholder="Selecciona tu carrera"
+                    >
+                      <option value="IGE"
+                        >Ingeniería en Gestión Empresarial</option
                       >
-                        <option value="IGE"
-                          >Ingeniería en Gestión Empresarial</option
-                        >
-                        <option value="IA">Ingeniería Ambiental</option>
-                        <option value="IBQ">Ingeniería Bioquímica</option>
-                        <option value="IBM">Ingeniería Biomédica</option>
-                        <option value="IQ">Ingeniería Química</option>
-                        <option value="IELE">Ingeniería Eléctrica</option>
-                        <option value="IELC">Ingeniería Electrónica</option>
-                        <option value="IM">Ingeniería Mecánica</option>
-                        <option value="IC">Ingeniería Civil</option>
-                        <option value="II">Ingeniería Industrial</option>
-                        <option value="ISC"
-                          >Ingeniería en Sistemas Computacionales</option
-                        >
-                        <option value="LA"
-                          >Licenciatura en Administración</option
-                        >
-                      </b-select>
-                    </b-field>
-                  </div>
-
-                  <div class="field">
-                    <b-field label="Ingreso">
-                      <b-input
-                        placeholder="Selecciona tu ingreso"
-                        size="is-small-medium"
-                        v-model="student.admission"
-                        type="number"
-                        min="1"
-                        max="12"
-                        expanded
+                      <option value="IA">Ingeniería Ambiental</option>
+                      <option value="IBQ">Ingeniería Bioquímica</option>
+                      <option value="IBM">Ingeniería Biomédica</option>
+                      <option value="IQ">Ingeniería Química</option>
+                      <option value="IELE">Ingeniería Eléctrica</option>
+                      <option value="IELC">Ingeniería Electrónica</option>
+                      <option value="IM">Ingeniería Mecánica</option>
+                      <option value="IC">Ingeniería Civil</option>
+                      <option value="II">Ingeniería Industrial</option>
+                      <option value="ISC"
+                        >Ingeniería en Sistemas Computacionales</option
                       >
-                      </b-input>
-                    </b-field>
-                  </div>
+                      <option value="LA">Licenciatura en Administración</option>
+                    </BSelectWithValidation>
+                  </b-field>
+
+                  <b-field label="Ingreso">
+                    <BInputWithValidation
+                      rules="required"
+                      placeholder="Selecciona tu ingreso"
+                      size="is-small-medium"
+                      v-model="student.admission"
+                      type="number"
+                      min="1"
+                      max="12"
+                      expanded
+                    />
+                  </b-field>
                 </ValidationObserver>
               </b-step-item>
               <b-step-item
@@ -283,34 +269,42 @@
                             <span class="file-label">Click to upload</span>
                           </span>
 
-                          <span class="file-name" v-if="schoolRequest.INE">{{
-                            schoolRequest.INE.name
-                          }}</span>
+                          <span class="file-name" v-if="schoolRequest.INE">
+                            {{ schoolRequest.INE.name }}
+                          </span>
                         </b-upload>
                       </b-field>
                       {{ errors[0] }}
                     </ValidationProvider>
+                    <br />
 
                     <template v-if="option == 'CONSTANCIA'">
-                      <label class="label">Foto infantil</label>
-                      <b-field
-                        class="file is-primary"
-                        :class="{ 'has-name': !!schoolRequest.photo }"
+                      <ValidationProvider
+                        rules="required"
+                        name="description"
+                        v-slot="{ errors, valid }"
                       >
-                        <b-upload
-                          required
-                          v-model="schoolRequest.photo"
-                          class="file-label"
+                        <label class="label">Foto infantil</label>
+                        <b-field
+                          class="file is-primary"
+                          :class="{ 'has-name': !!schoolRequest.photo }"
                         >
-                          <span class="file-cta">
-                            <b-icon class="file-icon" icon="upload"></b-icon>
-                            <span class="file-label">Click to upload</span>
-                          </span>
-                          <span class="file-name" v-if="schoolRequest.photo">{{
-                            schoolRequest.photo
-                          }}</span>
-                        </b-upload>
-                      </b-field>
+                          <b-upload
+                            required
+                            v-model="schoolRequest.photo"
+                            class="file-label"
+                          >
+                            <span class="file-cta">
+                              <b-icon class="file-icon" icon="upload"></b-icon>
+                              <span class="file-label">Click to upload</span>
+                            </span>
+                            <span class="file-name" v-if="schoolRequest.photo">
+                              {{ schoolRequest.photo.name }}
+                            </span>
+                          </b-upload>
+                        </b-field>
+                        {{ errors[0] }}
+                      </ValidationProvider>
                     </template>
                   </template>
                 </ValidationObserver>
@@ -365,8 +359,9 @@ import { mapState } from 'vuex'
 import { schoolRequest, setStudent } from '../api/users'
 
 export default {
-  mounted () {
+  async mounted () {
     this.activeStep = 0
+    const res = await this.$store.dispatch('getStudent')
   },
   data () {
     return {

@@ -5,7 +5,7 @@
       :type="{ 'is-danger': errors[0], 'is-success': valid }"
       :message="errors"
     >
-      <b-select placeholder="Select a subject" v-model="innerValue">
+      <b-select placeholder="Select a subject" v-model="innerValue" expanded>
         <slot/>
       </b-select>
     </b-field>
