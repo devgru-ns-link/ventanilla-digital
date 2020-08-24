@@ -3,7 +3,7 @@ import { extend } from "vee-validate";
 
 extend("required", {
   ...required,
-  message: "Este campo es requerido"
+  message: "Este campo es obligatorio"
 });
 
 extend("email", {

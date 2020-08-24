@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "publish": "npm run build && node ./publish.js"
+    "build:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES vue-cli-service build --modern",
+    "deploy:gh-pages": "cross-env NODE_DEBUG=gh-pages gh-pages -d dist -t",
+    "publish": "npm run build:gh-pages && npm run deploy:gh-pages"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -14,6 +16,7 @@
     "core-js": "^3.6.5",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^2.2.0",
+    "register-service-worker": "^1.7.1",
     "vee-validate": "^3.3.9",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
@@ -21,9 +24,11 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
+    "@vue/cli-plugin-pwa": "^4.5.4",
     "@vue/cli-plugin-router": "~4.4.0",
     "@vue/cli-plugin-vuex": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
+    "cross-env": "^7.0.2",
     "gh-pages": "^3.1.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^9.0.3",
