@@ -110,6 +110,7 @@ export default new Vuex.Store({
         } catch (error) {
           console.log('student', error)
           reject(error)
+          commit('SET_STUDENT_ENROLLMENT')
         }
       })
     },
