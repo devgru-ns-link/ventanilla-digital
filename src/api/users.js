@@ -62,3 +62,10 @@ export function schoolRequest (id, data) {
   })
 }
 
+export function getNotifications (id) {
+  return request({
+    url: `/users/${id}/notifications/`,
+    method: 'GET',
+  })
+}
+

@@ -129,9 +129,8 @@
                                 size="is-medium-small"
                                 expanded
                                 v-model="schoolRequest.description"
+                                placeholder="Seleccione una opcion"
                               >
-                                <option value>Seleccione una opcion</option>
-
                                 <option value="alta_imms">Alta</option>
                                 <option value="baja_imms">Baja</option>
                               </b-select>

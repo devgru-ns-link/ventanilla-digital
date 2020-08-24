@@ -108,13 +108,13 @@
               >
                 <a class="navbar-item" slot="trigger" role="button">
                   <i class="material-icons">notifications</i>
-                  <small class="badge">3</small>
+                  <small class="badge" v-if="$store.state.notification.length > 0">{{ $store.state.notification.length }}</small>
                 </a>
-                <b-dropdown-item has-link value="blog" aria-role="menuitem">
+                <b-dropdown-item has-link value="blog" aria-role="menuitem" v-if="$store.state.notification.length > 0">
                   <div class="card-table">
                     <div class="content">
                       <table class="table is-fullwidth is-striped">
-                        <div v-for="i in 3" :key="i">
+                        <div v-for="i in $store.state.notification.length" :key="i">
                           <router-link tag="a" to="/about">
                             <article class="media">
                               <div class="media-content">
@@ -138,6 +138,30 @@
                                     </div>
                                   </div>
                                 </nav>
+                              </div>
+                            </article>
+                          </router-link>
+                        </div>
+                      </table>
+                    </div>
+                  </div>
+                  <footer class="card-footer is-centered">
+                    <a href="#" class="card-footer-item">View All</a>
+                  </footer>
+                </b-dropdown-item>
+                <b-dropdown-item has-link value="blog" aria-role="menuitem" v-else>
+                  <div class="card-table">
+                    <div class="content">
+                      <table class="table is-fullwidth is-striped">
+                        <div>
+                          <router-link tag="a" to="/about">
+                            <article class="media">
+                              <div class="media-content">
+                                <div class="content">
+                                  <p>
+                                    No tienes ninguna notificación nueva
+                                  </p>
+                                </div>
                               </div>
                             </article>
                           </router-link>
