@@ -19,6 +19,7 @@ import {
 import BInputWithValidation from '@/components/inputs/BInputWithValidation'
 import BSelectWithValidation from '@/components/inputs/BSelectWithValidation'
 import BCheckboxesWithValidation from '@/components/inputs/BCheckboxesWithValidation'
+import './registerServiceWorker'
 
 Object.keys(rules).forEach(rule => {
   extend(rule, rules[rule])

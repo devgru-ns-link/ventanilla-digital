@@ -10,7 +10,7 @@
           <div class="columns is-vcentered">
             <div class="column is-5">
               <figure class="is-4by3">
-                <img src="../../img/Studying-pana.svg" alt="Description" />
+                <img src="../assets/Studying-pana.svg" alt="Description" />
               </figure>
             </div>
             <div class="column is-6 is-offset-1">
@@ -54,7 +54,7 @@
           <div class="card box cta">
             <div class="card-image">
               <figure class="image img">
-                <img src="../../img/estudiante.jpg" alt="Placeholder image" />
+                <img src="../assets/estudiante.jpg" alt="Placeholder image" />
               </figure>
             </div>
             <div class="card-content">
@@ -79,7 +79,7 @@
           <div class="card box cta">
             <div class="card-image">
               <figure class="image">
-                <img src="../../img/horario.jpg" alt="Placeholder image" />
+                <img src="../assets/horario.jpg" alt="Placeholder image" />
               </figure>
             </div>
             <div class="card-content">
@@ -104,7 +104,7 @@
           <div class="card box cta">
             <div class="card-image">
               <figure class="image">
-                <img src="../../img/seguimiento.jpg" alt="Placeholder image" />
+                <img src="../assets/seguimiento.jpg" alt="Placeholder image" />
               </figure>
             </div>
             <div class="card-content">
