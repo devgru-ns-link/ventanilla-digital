@@ -10,23 +10,8 @@ export default new Vuex.Store({
   state: {
     isLogued: false,
     user: {},
-    student: {
-      enrollment: 'e19080708',
-      admission: 3,
-      CURP: 'GAME910502HMCLRD00',
-      NSS: '21079101680',
-      career: 'isc',
-      specialty: 'n/a'
-    },
-    schoolRequest: {
-      type: '',
-      status: '',
-      description: '',
-      photo: null,
-      INE: null,
-      student: '7e959f58-880f-4596-8fa5-7202d94ed8f4',
-      user: null
-    },
+    student: {},
+    schoolRequest: {},
     isComponentModalActive: false
   },
   mutations: {
