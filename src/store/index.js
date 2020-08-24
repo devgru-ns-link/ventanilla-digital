@@ -1,7 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { getToken, setToken, decodeToken, removeToken } from '@/plugins/cookies'
-import { login, getUserInfo } from '@/api/users'
+import {
+  getToken,
+  setToken,
+  setRefreshToken,
+  getRefreshToken,
+  removeRefreshToken,
+  decodeToken,
+  removeToken
+} from '@/plugins/cookies'
+import { login, getUserInfo, refreshToken } from '@/api/users'
 import { getStudentInfo } from '../api/students'
 
 Vue.use(Vuex)
@@ -34,6 +42,7 @@ export default new Vuex.Store({
         try {
           const res = await login(data)
           setToken(res.access)
+          setRefreshToken(res.refresh)
           commit('SET_LOGIN', true)
           resolve(res)
         } catch (error) {
@@ -45,19 +54,36 @@ export default new Vuex.Store({
     logout () {
       return new Promise((resolve, reject) => {
         removeToken()
+        removeRefreshToken()
         resolve()
       })
     },
     verifyToken ({ commit }) {
       return new Promise(async (resolve, reject) => {
-        let Token = getToken()
-        Token = decodeToken(Token)
-        if (Token) {
+        let token = getToken()
+        let refresh = getRefreshToken()
+        if (token) {
           try {
-            const data = await getUserInfo(Token.id)
-            console.log(data)
+            const data = await refreshToken(refresh)
+            setToken(data.access)
+            resolve()
+          } catch (error) {
+            reject()
+          }
+        } else {
+          reject()
+        }
+      })
+    },
+    getUser ({ commit }) {
+      return new Promise(async (resolve, reject) => {
+        let token = getToken()
+        token = decodeToken(token)
+        if (token) {
+          try {
+            const user = await getUserInfo(token.id)
             commit('SET_LOGIN', true)
-            commit('SET_USER', data)
+            commit('SET_USER', user)
             resolve()
           } catch (error) {
             reject()
@@ -68,7 +94,7 @@ export default new Vuex.Store({
     getStudent ({ commit, state }) {
       return new Promise(async (resolve, reject) => {
         try {
-          const data = await getStudentInfo(state.user.enrrollment)
+          const data = await getStudentInfo(state.user.enrollment)
           console.log(data)
           commit('SET_STUDENT', data)
           resolve()

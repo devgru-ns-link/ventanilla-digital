@@ -1,6 +1,7 @@
 import axios from 'axios'
 import router from '@/router'
-import { getToken } from './cookies'
+import store from '@/store'
+import { getToken, decodeToken } from './cookies'
 import { SnackbarProgrammatic as Snackbar } from 'buefy'
 import { NotificationProgrammatic as Notification } from 'buefy'
 import { ToastProgrammatic as Toast } from 'buefy'
@@ -14,7 +15,7 @@ const service = axios.create({
   timeout: 20000
 })
 
-service.interceptors.request.use(config => {
+service.interceptors.request.use(async config => {
   // do something before request is sent
   // config.headers.post['Content-Type'] = 'application/json'
   // config.headers.put['Content-Type'] = 'application/json'
@@ -31,7 +32,7 @@ service.interceptors.response.use(
     return res.data
   },
   async error => {
-    console.log(error.response)
+    console.log(error)
     // Snackbar.open('Look at me!')
     // Notification.open('Notify!')
     // Toast.open('Toasty!')

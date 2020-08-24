@@ -8,7 +8,7 @@ export function getToken () {
   return Cookies.get(TokenKey)
 }
 
-export function getRefresh () {
+export function getRefreshToken () {
   return Cookies.get(RefreshKey)
 }
 
@@ -20,8 +20,12 @@ export function setRefreshToken (token) {
   return Cookies.set(RefreshKey, token)
 }
 
-export function removeToken (token) {
+export function removeToken () {
   return Cookies.remove(TokenKey)
+}
+
+export function removeRefreshToken () {
+  return Cookies.remove(RefreshKey)
 }
 
 export function decodeToken (token) {

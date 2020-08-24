@@ -71,8 +71,10 @@ router.beforeEach(async (to, from, next) => {
       try {
         // get user info
         await store.dispatch('verifyToken')
+        await store.dispatch('getUser')
         next()
       } catch (error) {
+        console.log(error)
         // remove token and go to login page to re-login
         await store.dispatch('logout')
         next(`/login?redirect=${to.path}`)
