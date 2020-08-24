@@ -25,7 +25,11 @@
         <section class="modal-card-body">
           <section class="container">
             <b-steps v-model="activeStep">
-              <b-step-item :clickable="false" label="Trámite" icon="file-document">
+              <b-step-item
+                :clickable="false"
+                label="Trámite"
+                icon="file-document"
+              >
                 <div class="tile is-ancestor">
                   <div class="tile is-vertical is-12">
                     <div class="tile">
@@ -69,7 +73,11 @@
                   </div>
                 </div>
               </b-step-item>
-              <b-step-item :clickable="false" label="Requisitos" icon="file-document-edit">
+              <b-step-item
+                :clickable="false"
+                label="Requisitos"
+                icon="file-document-edit"
+              >
                 <div class="columns">
                   <div class="column is-12">
                     <div>
@@ -171,6 +179,7 @@
                       <input
                         class="input"
                         type="text"
+                        v-model="student.first_name"
                         placeholder="Nombre(s)"
                       />
                     </div>
@@ -182,6 +191,7 @@
                       <input
                         class="input"
                         type="text"
+                        v-model="student.last_name"
                         placeholder="Apellidos"
                       />
                     </div>
@@ -193,6 +203,7 @@
                       <input
                         class="input"
                         type="text"
+                        v-model="student.enrollment"
                         placeholder="Matrícula"
                       />
                     </div>
@@ -203,6 +214,7 @@
                       <b-select
                         placeholder="Selecciona tu carrera"
                         size="is-small-medium"
+                        v-model="student.career"
                         expanded
                       >
                         <option value="IGE"
@@ -229,67 +241,79 @@
 
                   <div class="field">
                     <b-field label="Ingreso">
-                      <b-select
+                      <b-input
                         placeholder="Selecciona tu ingreso"
                         size="is-small-medium"
+                        v-model="student.admission"
+                        type="number"
+                        min="1"
+                        max="12"
                         expanded
                       >
-                        <option v-for="i in 12" :key="i" value="i">{{
-                          i
-                        }}</option>
-                      </b-select>
+                      </b-input>
                     </b-field>
                   </div>
                 </ValidationObserver>
               </b-step-item>
-              <b-step-item :clickable="false" label="Archivos" icon="cloud-upload">
-                <template>
-                  <label class="label">INE</label>
-                  <b-field
-                    class="file is-primary"
-                    :class="{ 'has-name': !!file }"
-                  >
-                    <b-upload v-model="file" class="file-label">
-                      <span class="file-cta">
-                        <b-icon class="file-icon" icon="upload"></b-icon>
-                        <span class="file-label">Click to upload</span>
-                      </span>
-                      <span class="file-name" v-if="file">{{ file.name }}</span>
-                    </b-upload>
-                  </b-field>
-
-                  <template v-if="option == 'CONSTANCIA'">
-                    <label class="label">Foto infantil</label>
-                    <b-field
-                      class="file is-primary"
-                      :class="{ 'has-name': !!file }"
+              <b-step-item
+                :clickable="false"
+                label="Archivos"
+                icon="cloud-upload"
+              >
+                <ValidationObserver ref="form3">
+                  <template>
+                    <ValidationProvider
+                      rules="required"
+                      name="description"
+                      v-slot="{ errors, valid }"
                     >
-                      <b-upload v-model="file" class="file-label">
-                        <span class="file-cta">
-                          <b-icon class="file-icon" icon="upload"></b-icon>
-                          <span class="file-label">Click to upload</span>
-                        </span>
-                        <span class="file-name" v-if="file">{{
-                          file.name
-                        }}</span>
-                      </b-upload>
-                    </b-field>
-                  </template>
-                </template>
-                <!-- <div class="tags">
-                        <span
-                          v-for="(file, index) in dropFiles"
-                          :key="index"
-                          class="tag is-primary"
+                      <label class="label">INE</label>
+
+                      <b-field
+                        class="file is-primary"
+                        :class="{ 'has-name': !!schoolRequest.INE }"
+                      >
+                        <b-upload
+                          required
+                          v-model="schoolRequest.INE"
+                          class="file-label"
                         >
-                          {{ file.name }}
-                          <button
-                            class="delete is-small"
-                            type="button"
-                            @click="deleteDropFile(index)"
-                          ></button>
-                        </span>
-                </div>-->
+                          <span class="file-cta">
+                            <b-icon class="file-icon" icon="upload"></b-icon>
+                            <span class="file-label">Click to upload</span>
+                          </span>
+
+                          <span class="file-name" v-if="schoolRequest.INE">{{
+                            schoolRequest.INE.name
+                          }}</span>
+                        </b-upload>
+                      </b-field>
+                      {{ errors[0] }}
+                    </ValidationProvider>
+
+                    <template v-if="option == 'CONSTANCIA'">
+                      <label class="label">Foto infantil</label>
+                      <b-field
+                        class="file is-primary"
+                        :class="{ 'has-name': !!schoolRequest.photo }"
+                      >
+                        <b-upload
+                          required
+                          v-model="schoolRequest.photo"
+                          class="file-label"
+                        >
+                          <span class="file-cta">
+                            <b-icon class="file-icon" icon="upload"></b-icon>
+                            <span class="file-label">Click to upload</span>
+                          </span>
+                          <span class="file-name" v-if="schoolRequest.photo">{{
+                            schoolRequest.photo
+                          }}</span>
+                        </b-upload>
+                      </b-field>
+                    </template>
+                  </template>
+                </ValidationObserver>
               </b-step-item>
 
               <template slot="navigation" slot-scope="{ previous, next }">
@@ -297,7 +321,7 @@
                   <b-button
                     v-if="activeStep == 3"
                     type="is-primary"
-                    @click="confirmCustom"
+                    @click="submit"
                     size="is-medium"
                     expanded
                     >¡Terminar y enviar!</b-button
@@ -338,6 +362,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { schoolRequest, setStudent } from '../api/users'
 
 export default {
   mounted () {
@@ -378,7 +403,14 @@ export default {
           break
       }
     },
-    confirmCustom () {
+    async submit () {
+      let success = await this.$refs.form3.validate()
+      const form_data = new FormData()
+      if (!success) return
+      // delete this.schoolRequest.INE
+      for (var key in this.schoolRequest) {
+        form_data.append(key, this.schoolRequest[key])
+      }
       this.$buefy.dialog.confirm({
         title: 'Revisa que los datos sean correctos',
         message: `Trámite solicitado: ` + this.option,
@@ -387,11 +419,14 @@ export default {
         type: 'is-info',
         hasIcon: true,
         iconPack: 'fa',
-        onConfirm: () =>
+        onConfirm: async () => {
+          await setStudent(this.user.id, this.student)
+          await schoolRequest(this.user.id, form_data)
           this.$buefy.toast.open({
             message: '¡Solicitud enviada correctamente!',
             type: 'is-success'
           })
+        }
       })
     }
   }
