@@ -18,7 +18,7 @@ workbox.setConfig({
   )
   
   workbox.routing.registerRoute(
-    new RegExp('https://some-fancy-api.com'),
+    new RegExp('https://digital-window.herokuapp.com'),
     workbox.strategies.networkFirst({
       cacheName: 'api'
     })
