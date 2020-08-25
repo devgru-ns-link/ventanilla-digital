@@ -78,8 +78,15 @@
                 label="Requisitos"
                 icon="file-document-edit"
               >
-                <article class="message">
-                  <div class="message-body" v-if="option == 'CONSTANCIA'">
+                <b-message
+                  :title="option"
+                  type="is-primary"
+                  has-icon
+                  size="is-small"
+                  class="message"
+                  :closable="false"
+                >
+                  <div v-if="option == 'CONSTANCIA'">
                     ¡Bien!, has seleccionado
                     <strong>Constancia de estudios</strong> un documento muy
                     útil para validar tu actividad estudiantil, ahora solo falta
@@ -87,13 +94,13 @@
                     estudiantiles, subir tu INE, foto infantil y
                     <b>¡Listo!</b> trámite realizado.
                   </div>
-                  <div class="message-body" v-if="option == 'IMSS'">
+                  <div v-if="option == 'IMSS'">
                     ¡Hola!, esta es la sección para darte de
                     <strong>Alta o Baja del IMSS</strong>, ahora solo falta
                     llenar unos cuantos datos para el trámite, presentar una
                     fotografía de tu INE y <b>¡Listo!</b> trámite realizado.
                   </div>
-                  <div class="message-body" v-if="option == 'HORARIO'">
+                  <div v-if="option == 'HORARIO'">
                     ¡Hey!, aquí podrás solicitar tu <strong>Horario</strong>,
                     una herramienta que te ayudará a organizarte para tus
                     clases, además de que es muy útil para presentar como
@@ -101,14 +108,14 @@
                     de <b>siguiente</b>, enviarnos tus datos, una fotografía de
                     tu INE y <b>¡Listo!</b> trámite realizado.
                   </div>
-                  <div class="message-body" v-if="option == 'SEGUIMIENTO'">
+                  <div v-if="option == 'SEGUIMIENTO'">
                     ¡Sí!, así de fácil es solicitar un
                     <strong>Seguimiento académico</strong>, un documento muy
                     útil para ver tu progreso escolar, solo dale a
                     <b>siguiente</b>, completa tus datos faltantes, una foto de
                     tu INE y <b>¡Listo!</b> trámite realizado.
                   </div>
-                </article>
+                </b-message>
 
                 <div class="columns">
                   <div class="column is-12">
@@ -276,6 +283,18 @@
                 label="Archivos"
                 icon="cloud-upload"
               >
+                <b-message
+                  title="Carga de documentos"
+                  type="is-primary"
+                  has-icon
+                  size="is-small"
+                  icon="paperclip"
+                  class="message"
+                  :closable="false"
+                >
+                  <strong>¡IMPORTANTE!</strong> <br> Solo se aceptan documentos en
+                  formato (.jpg, .jpeg, .png, .pdf) con un peso máximo de <b>4Mb</b>
+                </b-message>
                 <ValidationObserver ref="form3">
                   <template>
                     <ValidationProvider
@@ -431,8 +450,7 @@ export default {
     close_form () {
       this.$buefy.dialog.confirm({
         title: '¡Hey!',
-        message:
-          `Estás en proceso de realizar una solicitud. ¿Deseas cancelarla?`,
+        message: `Estás en proceso de realizar una solicitud. ¿Deseas cancelarla?`,
         cancelText: 'Continuar',
         confirmText: 'Salir',
         type: 'is-danger',
