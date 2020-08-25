@@ -1,6 +1,6 @@
 {
-    "name": "AAAIMX",
-    "short_name": "AAAIMX",
+    "name": "Ventanilla Digital ITM",
+    "short_name": "Ventanilla Digital ITM",
     "icons": [
         {
             "src": "/digital-window/img/icons/android-chrome-192x192.png",
@@ -14,7 +14,7 @@
         }
     ],
     "start_url": "/digital-window/index.html",
-    "theme_color": "#ffffff",
+    "theme_color": "#800000",
     "background_color": "#ffffff",
     "display": "standalone"
 }
