@@ -6,11 +6,15 @@
           <div class="box">
             <h1>Ventanilla Digital</h1>
             <figure class="avatar">
-              <img
+              <router-link
+                class="notification"
+                tag="img"
                 src="https://www.itmerida.mx/imagenes/tec.png"
                 width="125px"
                 alt="Logo"
-              />
+                to="/home"
+              >
+              </router-link>
             </figure>
             <form>
               <div class="field">
@@ -36,7 +40,7 @@
                   />
                 </div>
               </div>
-              
+
               <div class="field">
                 <label class="checkbox">
                   <input type="checkbox" />
@@ -94,7 +98,10 @@ export default {
       this.isLoading = true
       try {
         await this.$store.dispatch('login', this.user)
-        this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+        this.$router.push({
+          path: this.redirect || '/',
+          query: this.otherQuery
+        })
       } catch (error) {
         if (error.detail) {
           this.alertCustomError(error.detail)
@@ -175,5 +182,13 @@ p.subtitle {
   font-size: 40px;
   font-weight: 800;
   letter-spacing: -2px;
+}
+
+.notification:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: scale(
+    1.1
+  ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 </style>
