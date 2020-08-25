@@ -44,7 +44,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-window/img/seguimiento.ae8f45fb.jpg"
   },
   {
-    "revision": "a47bf54ce2813d4e26e14cffeb2e0192",
+    "revision": "73e0f1448e474756db16ecd4b59d0001",
     "url": "/digital-window/index.html"
   },
   {
@@ -84,7 +84,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-window/js/chunk-vendors-legacy.2327e010.js"
   },
   {
-    "revision": "8cb92a563e9e4eadc38bf91bede1bd13",
+    "revision": "63d3d6b27793c7a831e37164f06851a7",
     "url": "/digital-window/manifest.json"
   }
 ]);

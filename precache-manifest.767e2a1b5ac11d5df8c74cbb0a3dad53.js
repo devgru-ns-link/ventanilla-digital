@@ -48,7 +48,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-window/img/seguimiento.ae8f45fb.jpg"
   },
   {
-    "revision": "7c4e3c990c5a950757a987beb5aa82fd",
+    "revision": "080bf26142e18b4e3d3dd447e2b9a97d",
     "url": "/digital-window/index.html"
   },
   {
@@ -92,7 +92,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-window/logo_self_service2.png"
   },
   {
-    "revision": "8cb92a563e9e4eadc38bf91bede1bd13",
+    "revision": "63d3d6b27793c7a831e37164f06851a7",
     "url": "/digital-window/manifest.json"
   },
   {
