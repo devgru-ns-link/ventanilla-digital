@@ -19,7 +19,7 @@
           <button
             class="delete"
             aria-label="close"
-            @click="show_form(false), (activeStep = 0)"
+            @click="close_form()"
           ></button>
         </header>
         <section class="modal-card-body">
@@ -134,9 +134,9 @@
                               placeholder="Selecciona un tipo de constancia"
                               v-model="schoolRequest.description"
                             >
-                              <option value="Normal">Normal</option>
+                              <option value="NORMAL">Normal</option>
                               <option value="SITUR">SITUR</option>
-                              <option value="Promedio">Promedio</option>
+                              <option value="PROMEDIO">Promedio</option>
                             </b-select>
                           </b-field>
                         </ValidationProvider>
@@ -397,8 +397,7 @@ export default {
     return {
       file: null,
       activeStep: 0,
-      option: '',
-      tramite: ''
+      option: ''
     }
   },
   computed: { ...mapState(['user', 'student', 'schoolRequest']) },
@@ -429,12 +428,38 @@ export default {
           break
       }
     },
+    close_form () {
+      this.$buefy.dialog.confirm({
+        title: '¡Hey!',
+        message:
+          `Estás en proceso de realizar una solicitud. ¿Deseas cancelarla?`,
+        cancelText: 'Continuar',
+        confirmText: 'Cancelar',
+        type: 'is-danger',
+        hasIcon: true,
+        iconPack: 'fa',
+        onConfirm: async () => {
+          this.$buefy.toast.open({
+            message: 'Solicitud cancelada',
+            type: 'is-danger'
+          })
+          this.$store.commit('CLEAR_REQ')
+          this.show_form(false)
+          this.activeStep = 0
+        }
+      })
+    },
     async submit () {
       let success = await this.$refs.form3.validate()
       if (!success) return
       this.$buefy.dialog.confirm({
-        title: 'Revisa que los datos sean correctos',
-        message: `Trámite solicitado: ` + this.option,
+        title: '¡Por último!',
+        message:
+          `Revisa que tus datos sean correctos.
+        Has seleccionado el trámite: ` +
+          this.option +
+          ' de tipo: ' +
+          this.$store.state.schoolRequest.description,
         cancelText: 'Cancelar',
         confirmText: 'Enviar',
         type: 'is-info',
@@ -454,6 +479,9 @@ export default {
             message: '¡Solicitud enviada correctamente!',
             type: 'is-success'
           })
+          this.$store.commit('CLEAR_REQ')
+          this.show_form(false)
+          this.activeStep = 0
         }
       })
     }
