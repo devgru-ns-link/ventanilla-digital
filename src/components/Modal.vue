@@ -434,7 +434,7 @@ export default {
         message:
           `Estás en proceso de realizar una solicitud. ¿Deseas cancelarla?`,
         cancelText: 'Continuar',
-        confirmText: 'Cancelar',
+        confirmText: 'Salir',
         type: 'is-danger',
         hasIcon: true,
         iconPack: 'fa',

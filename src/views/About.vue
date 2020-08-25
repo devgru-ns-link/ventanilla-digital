@@ -22,9 +22,11 @@
                 <p class="subtitle is-5">Instituto Tecnológico de Mérida</p>
 
                 <ul>
-                  <li>{{ user.enrollment }}</li>
-                  <li>Aún no has indicado tu carrera</li>
-                  <li>Aún no has indicado tu semestre</li>
+                  <li>Matrícula: {{ user.enrollment }}</li>
+                  <li v-if="!student.career">Aún no has indicado tu carrera</li>
+                  <li v-else>Carrera: {{ student.career }}</li>
+                  <li v-if="!student.admission">Aún no has indicado tu semestre</li>
+                  <li v-else>Ingreso: {{ student.admission }}</li>
                 </ul>
               </div>
             </div>
