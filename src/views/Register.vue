@@ -10,10 +10,11 @@
             </h2>
             <p>
               Esta es una plataforma para solicitar a distancia los trámites de
-              control escolar y ayudar contra el <b>covid-19</b>.
+              control escolar y ayudar contra el
+              <b>covid-19</b>.
             </p>
           </div>
-          <div class="column right ">
+          <div class="column right">
             <div class="has-text-centered">
               <h1 class="title is-4">Registrate ahora!</h1>
               <p class="description">
@@ -21,66 +22,84 @@
               </p>
             </div>
 
-            <form>
-              <!-- Como hacer otra barrita
+            <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
+              <form @submit="false">
+                <!-- Como hacer otra barrita
               <b-field> 
                 <b-input type="text" placeholder="Matricula" v-model="enrollment"></b-input>
               </b-field> 
-              -->
+                -->
+                <b-field>
+                  <BInputWithValidation
+                    rules="required"
+                    type="text"
+                    placeholder="Nombre(s)"
+                    v-model="user.first_name"
+                  />
+                </b-field>
 
-              <b-field type="is-success" message="La matricula esta disponible">
-                <b-input
-                  type="text"
-                  placeholder="Matricula"
-                  maxlength="30"
-                  v-model="enrollment"
-                ></b-input>
-              </b-field>
+                <b-field>
+                  <BInputWithValidation
+                    rules="required"
+                    type="text"
+                    placeholder="Apellido(s)"
+                    v-model="user.last_name"
+                  />
+                </b-field>
 
-              <b-field type="is-danger" message="El correo es invalido">
-                <b-input
-                  type="email"
-                  placeholder="Correo"
-                  maxlength="30"
-                  v-model="email"
+                <b-field type="text" :isValid="false">
+                  <BInputWithValidation
+                    rules="required|matricula"
+                    type="text"
+                    placeholder="Matricula"
+                    v-model="user.enrollment"
+                  />
+                </b-field>
+
+                <b-field>
+                  <BInputWithValidation
+                    rules="required|email|email-edu"
+                    type="email"
+                    v-model="user.email"
+                    placeholder="Correo institucional"
+                  />
+                </b-field>
+
+                <b-field>
+                  <BInputWithValidation
+                    rules="required|len"
+                    type="password"
+                    placeholder="Contraseña"
+                    password-reveal
+                    vid="password"
+                    v-model="user.password"
+                  />
+                </b-field>
+
+                <b-field>
+                  <BInputWithValidation
+                    rules="required|confirmed:password"
+                    name="Password"
+                    type="password"
+                    placeholder="Confirmar contraseña"
+                    password-reveal
+                    v-model="user.password_confirm"
+                  />
+                </b-field>
+                <button
+                  class="button is-block is-primary is-fullwidth"
+                  :class="{ 'is-loading': isLoading }"
+                  @click.prevent="signup, handleSubmit(signup)"
                 >
-                </b-input>
-              </b-field>
-
-              <b-field>
-                <b-input
-                  type="password"
-                  placeholder="Contraseña"
-                  password-reveal
-                  v-model="password"
-                >
-                </b-input>
-              </b-field>
-
-              <b-field>
-                <b-input
-                  type="password"
-                  placeholder="Confirmar contraseña"
-                  password-reveal
-                  v-model="password_confirm"
-                >
-                </b-input>
-              </b-field>
-
-              <button
-                class="button is-block is-primary is-fullwidth"
-                @click="signup"
-              >
-                Registrarse
-              </button>
-              <br />
-              <small
-                ><em>¿Ya tns na cnta?</em
-                ><router-link tag="a" to="/login">
-                  Log in
-                </router-link>
-              </small>
-            </form>
+                  Registrarse
+                </button>
+                <br />
+                <small>
+                  <em>¿Ya tienes una cuenta?</em>
+                  <router-link tag="a" to="/login"> Iniciar sesión</router-link>
+                </small>
+              </form>
+            </ValidationObserver>
           </div>
         </div>
       </div>
@@ -112,7 +131,7 @@
           </div>
           <div class="level-right">
             <small class="level-item" style="color: var(--textLight)">
-              &copy; Instituto Tecnologico de Merida. Todos los derechos
+              &copy; Instituto Tecnológico de Mérida. Todos los derechos
               reservados.
             </small>
           </div>
@@ -124,25 +143,62 @@
 
 <script>
 import { register } from '@/api/users'
+
 export default {
   data () {
     return {
-      enrollment: '',
-      email: '',
-      password: '',
-      password_confirm: ''
+      user: {
+        first_name: '',
+        last_name: '',
+        enrollment: '',
+        email: '',
+        password: '',
+        password_confirm: ''
+      },
+      isLoading: false
     }
   },
+
   methods: {
-    async signup () {
-      const res = await register({
-        enrollment: this.enrollment,
-        email: this.email,
-        password: this.password,
-        password_confirm: this.password_confirm
+    alertCustomError (error) {
+      this.$buefy.snackbar.open({
+        message: error,
+        type: 'is-danger',
+        position: 'is-bottom-left',
+        actionText: 'OK',
+        queue: false
       })
-      console.log(res)
-      this.$router.push('/home') //Redireccionamiento con codigo
+    },
+    async signup () {
+      this.isLoading = true
+      try {
+        const res = await register(this.user)
+        console.log(res)
+        this.$buefy.dialog.alert({
+          title: '¡Ya casi!',
+          message: 'Por favor checa tu correo para confirmar tu cuenta',
+          type: 'is-success',
+          hasIcon: true,
+          icon: 'check-circle',
+          iconPack: 'fa',
+          ariaRole: 'alertdialog',
+          ariaModal: true
+        })
+        await this.$router.push('/home') //Redireccionamiento con codigo
+      } catch (error) {
+        console.log(error)
+        if (error.password) {
+          for (const e of error.password) {
+            this.alertCustomError(e)
+          }
+        } else {
+          for (const e of Object.values(error)) {
+            this.alertCustomError(e[0])
+          }
+        }
+      } finally {
+        this.isLoading = false
+      }
     }
   }
 }
@@ -229,6 +285,8 @@ input:focus {
   margin-right: 1rem;
 }
 
-.va { display: flex; align-items: center; }
-
+.va {
+  display: flex;
+  align-items: center;
+}
 </style>

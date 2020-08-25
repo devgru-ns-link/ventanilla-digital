@@ -1,48 +1,99 @@
 <template>
-  <section class="container">
-    <div class="columns is-multiline">
-      <div class="column is-8 is-offset-2 register">
-        <div class="columns">
-          <div class="column left is-hidden-touch">
-            <h1 class="title is-1">Vntanlla Dgtal</h1>
-            <h2 class="subtitle colored is-4">Lorem ipsum dolor sit amet.</h2>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
-              ex deleniti aliquam tempora libero excepturi vero soluta odio
-              optio sed.
-            </p>
-          </div>
-          <div class="column right has-text-centered">
-            <h1 class="title is-4">Sign up today</h1>
-            <p class="description">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit
-            </p>
-            <form>
-              <div class="field">
-                <div class="control">
-                  <input
-                    class="input is-medium"
-                    type="text"
-                    placeholder="Name"
-                  />
-                </div>
+  <div>
+    <br />
+    <br />
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <article class="media">
+            <figure class="media-left">
+              <div class="image is-128x128">
+                <img
+                  class="is-rounded"
+                  src="https://cdn.pixabay.com/photo/2016/11/14/17/39/person-1824144_960_720.png"
+                />
               </div>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <h1 class="title is-3">
+                  {{ user.first_name }} {{ user.last_name }}
+                </h1>
+                <p class="subtitle is-5">Instituto Tecnológico de Mérida</p>
 
-              <div class="field">
-                <div class="control">
-                  <input
-                    class="input is-medium"
-                    type="email"
-                    placeholder="Email"
-                  />
+                <ul>
+                  <li>Matrícula: {{ user.enrollment }}</li>
+                  <li v-if="!student.career">Aún no has indicado tu carrera</li>
+                  <li v-else>Carrera: {{ student.career }}</li>
+                  <li v-if="!student.admission">Aún no has indicado tu semestre</li>
+                  <li v-else>Ingreso: {{ student.admission }}</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="title">Mis solicitudes</h2>
+        <b-message type="is-warning" has-icon
+          >Aún no has realizado una solicitud</b-message
+        >
+        <b-message type="is-info" has-icon
+          ><p>
+            ¡Hola!, en esta sección podrás realizar los trámites escolares que
+            necesites, solamente debes seleccionar el trámite, llenar los
+            requerimientos y darle al botón de solicitar,
+            <b>¡Así de fácil!</b>
+          </p>
+        </b-message>
+
+        <div class="columns is-centered is-multiline is-mobile">
+          <div v-for="i in 10" :key="i" class="column is-one-quarter-desktop">
+            <div class="card">
+              <div class="card-image"></div>
+              <header class="card-header">
+                <div class="card-header-title">
+                  <span>
+                    Admin
+                    <small>(Light)</small>
+                  </span>
+                  <span class="is-pulled-right">
+                    <span class="tag is-default">Desktop</span>
+                    <span class="tag is-danger">WIP</span>
+                  </span>
+                </div>
+              </header>
+
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4">John Smith</p>
+                    <p class="subtitle is-6">@johnsmith</p>
+                  </div>
+                </div>
+
+                <div class="content">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Phasellus nec iaculis mauris.
+                  <a>@bulmaio</a>.
+                  <a href="#">#css</a>
+                  <a href="#">#responsive</a>
                 </div>
               </div>
-              <button class="button is-block is-primary is-fullwidth is-medium">
-                Submit
-              </button>
-              <br />
-              <small><em>Lorem ipsum dolor sit amet consectetur.</em></small>
-            </form>
+              <footer class="card-footer">
+                <a href="templates/admin.html" class="card-footer-item"
+                  >Preview</a
+                >
+                <a
+                  href="https://github.com/BulmaTemplates/bulma-templates/blob/master/templates/admin.html"
+                  class="card-footer-item"
+                  >Source Code</a
+                >
+              </footer>
+            </div>
           </div>
         </div>
       </div>
@@ -83,84 +134,14 @@
   </section>
 </template>
 
-<style>
-:root {
-  /* --brandColor: hsl(166, 67%, 51%); */
-  --background: rgb(247, 247, 247);
-  --textDark: hsla(0, 0%, 0%, 0.66);
-  --textLight: hsla(0, 0%, 0%, 0.33);
+<script>
+import { mapState } from 'vuex'
+export default {
+  async created () {
+    await this.$store.dispatch('getStudent')
+  },
+  computed: {
+    ...mapState(['user', 'student'])
+  }
 }
-
-body {
-  background: var(--background);
-  height: 100vh;
-  color: var(--textDark);
-}
-
-.field:not(:last-child) {
-  margin-bottom: 1rem;
-}
-
-.register {
-  margin-top: 10rem;
-  background: white;
-  border-radius: 10px;
-}
-
-.left,
-.right {
-  padding: 3rem;
-}
-
-.left {
-  border-right: 5px solid var(--background);
-}
-
-.left .title {
-  font-weight: 800;
-  letter-spacing: -2px;
-}
-
-.left .colored {
-  color: var(--brandColor);
-  font-weight: 500;
-  margin-top: 1rem !important;
-  letter-spacing: -1px;
-}
-
-.left p {
-  color: var(--textLight);
-  font-size: 1.15rem;
-}
-
-.right .title {
-  font-weight: 800;
-  letter-spacing: -1px;
-}
-
-.right .description {
-  margin-top: 1rem;
-  margin-bottom: 1rem !important;
-  color: var(--textLight);
-  font-size: 1.15rem;
-}
-
-.right small {
-  color: var(--textLight);
-}
-
-input {
-  font-size: 1rem;
-}
-
-input:focus {
-  border-color: var(--brandColor) !important;
-  box-shadow: 0 0 0 1px var(--brandColor) !important;
-}
-
-.fab,
-.fas {
-  color: var(--textLight);
-  margin-right: 1rem;
-}
-</style>
+</script>

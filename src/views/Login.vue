@@ -2,50 +2,66 @@
   <section class="hero is-success is-fullheight">
     <div class="hero-body">
       <div class="container has-text-centered">
-        <div class="column is-5 is-offset-3">
+        <div class="column is-5 is-offset-4">
           <div class="box">
             <h1>Ventanilla Digital</h1>
             <figure class="avatar">
-              <img src="https://www.itmerida.mx/imagenes/tec.png" width="125px" alt="Logo" />
+              <router-link
+                class="notification"
+                tag="img"
+                src="https://www.itmerida.mx/imagenes/tec.png"
+                width="125px"
+                alt="Logo"
+                to="/home"
+              >
+              </router-link>
             </figure>
             <form>
-              <div class="field">
-                <div class="control">
-                  <input
-                    class="input"
-                    type="text"
-                    placeholder="Matrícula"
-                    autofocus
-                    v-model="enrollment"
-                  />
-                </div>
-              </div>
+              <b-field>
+                <b-input
+                  placeholder="Matricula"
+                  type="text"
+                  icon="account"
+                  required
+                  v-model="user.enrollment"
+                >
+                </b-input>
+              </b-field>
 
-              <div class="field">
-                <div class="control">
-                  <input
-                    class="input"
-                    type="password"
-                    placeholder="Contraseña"
-                    v-model="password"
-                  />
-                </div>
-              </div>
+              <b-field>
+                <b-input
+                  required
+                  type="password"
+                  placeholder="Contraseña"
+                  password-reveal
+                  icon="lock"
+                  v-model="user.password"
+                  @keyup.enter="submit"
+                >
+                </b-input>
+              </b-field>
+
               <div class="field">
                 <label class="checkbox">
                   <input type="checkbox" />
                   Recuérdame
                 </label>
               </div>
-              <button class="button is-block is-info is-large is-fullwidth" @click="submit">
+              <button
+                class="button is-block is-info is-large is-fullwidth"
+                :class="{ 'is-loading': isLoading }"
+                @click.prevent="submit"
+              >
                 Iniciar sesión
                 <i class="fa fa-sign-in" aria-hidden="true"></i>
               </button>
             </form>
           </div>
-          <p class="has-text-grey">
-            <router-link tag="a" to="/register">Registrarse</router-link>&nbsp;·&nbsp;
-            <a href="../">Olvidé mi contraseña</a>
+          <p class="has-text-black">
+            ¿No tienes una cuenta?&nbsp;·&nbsp;
+            <router-link tag="a" to="/register">Regístrate</router-link>
+            <!-- <br />¿Olvidaste tu contraseña? &nbsp;·&nbsp;
+            <a href="../">Recuperar contraseña</a> -->
           </p>
         </div>
       </div>
@@ -54,36 +70,54 @@
 </template>
 
 <script>
-import { login } from "@/api/users";
+import redirect from '../mixins/redirect'
 export default {
-  created() {
-    if (this.$store.state.isLogued) {
-      this.$router.push("/home");
+  mixins: [redirect],
+  data () {
+    return {
+      user: {
+        enrollment: '',
+        password: ''
+      },
+      message: '',
+      isLoading: false
     }
   },
-  data() {
-    return {
-      enrollment: "",
-      password: "",
-    };
-  },
   methods: {
-    async submit() {
-      const res = await login({
-        enrollment: this.enrollment,
-        password: this.password,
-      });
-      console.log(res);
-      this.$router.push("/home"); //Redireccionamiento con codigo
+    alertCustomError (error) {
+      this.$buefy.snackbar.open({
+        duration: 5000,
+        message: error,
+        type: 'is-danger',
+        position: 'is-bottom-left',
+        actionText: 'OK',
+        queue: false
+      })
     },
-  },
-};
+    async submit () {
+      this.isLoading = true
+      try {
+        await this.$store.dispatch('login', this.user)
+        this.$router.push({
+          path: this.redirect || '/',
+          query: this.otherQuery
+        })
+      } catch (error) {
+        if (error.detail) {
+          this.alertCustomError(error.detail)
+        }
+      } finally {
+        this.isLoading = false
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>
 html,
 body {
-  font-family: "Questrial", sans-serif;
+  font-family: 'Questrial', sans-serif;
   font-size: 14px;
   font-weight: 300;
 }
@@ -148,5 +182,13 @@ p.subtitle {
   font-size: 40px;
   font-weight: 800;
   letter-spacing: -2px;
+}
+
+.notification:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: scale(
+    1.1
+  ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 </style>
