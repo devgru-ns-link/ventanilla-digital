@@ -9,7 +9,10 @@ import { DialogProgrammatic as Dialog } from 'buefy'
 
 // create singleton for axios
 const service = axios.create({
-  baseURL: 'https://digital-window.herokuapp.com/api/v1', // URL
+  baseURL:
+    process.env.NODE_ENV === 'dev'
+      ? 'http://127.0.0.1:8000/api/v1' // URL
+      : 'https://digital-window.herokuapp.com/api/v1',
   mode: 'cors',
   credentials: 'same-origin',
   timeout: 20000

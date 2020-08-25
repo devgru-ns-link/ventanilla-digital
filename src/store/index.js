@@ -45,7 +45,10 @@ export default new Vuex.Store({
     },
     SHOW_FORM (state, value) {
       state.isComponentModalActive = value
-    }
+    },
+    SET_TYPE (state, value) {
+      state.schoolRequest.type = value
+    },
   },
   actions: {
     login ({ commit }, data) {

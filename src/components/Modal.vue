@@ -45,7 +45,7 @@
                         </article>
                         <article
                           class="tile is-child notification is-primary"
-                          @click="optionSelected(2, 'horario')"
+                          @click="optionSelected(1, 'HORARIO')"
                         >
                           <p class="title is-5">Horario escolar</p>
                           <p class="subtitle is-6">Bottom tile</p>
@@ -54,14 +54,14 @@
                       <div class="tile is-parent is-vertical">
                         <article
                           class="tile is-child notification is-primary"
-                          @click="optionSelected(1, 'IMMS')"
+                          @click="optionSelected(1, 'IMSS')"
                         >
                           <p class="title is-5">Alta/Baja IMSS</p>
                           <p class="subtitle is-6">Requiere NSS</p>
                         </article>
                         <article
                           class="tile is-child notification is-primary"
-                          @click="optionSelected(2, 'seguimiento')"
+                          @click="optionSelected(1, 'SEGUIMIENTO')"
                         >
                           <p class="title is-5">Seguimiento académico</p>
                           <p class="subtitle is-6">
@@ -79,13 +79,34 @@
                 icon="file-document-edit"
               >
                 <article class="message">
-                  <div class="message-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    <strong>Pellentesque risus mi</strong>, tempus quis placerat
-                    ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet
-                    fringilla. Nullam gravida purus diam, et dictum
-                    <a>felis venenatis</a> efficitur. Aenean ac
-                    <em>eleifend lacus</em>,
+                  <div class="message-body" v-if="option == 'CONSTANCIA'">
+                    ¡Bien!, has seleccionado
+                    <strong>Constancia de estudios</strong> un documento muy
+                    útil para validar tu actividad estudiantil, ahora solo falta
+                    seleccionar el tipo, llenar unos cuantos datos
+                    estudiantiles, subir tu INE, foto infantil y
+                    <b>¡Listo!</b> trámite realizado.
+                  </div>
+                  <div class="message-body" v-if="option == 'IMSS'">
+                    ¡Hola!, esta es la sección para darte de
+                    <strong>Alta o Baja del IMSS</strong>, ahora solo falta
+                    llenar unos cuantos datos para el trámite, presentar una
+                    fotografía de tu INE y <b>¡Listo!</b> trámite realizado.
+                  </div>
+                  <div class="message-body" v-if="option == 'HORARIO'">
+                    ¡Hey!, aquí podrás solicitar tu <strong>Horario</strong>,
+                    una herramienta que te ayudará a organizarte para tus
+                    clases, además de que es muy útil para presentar como
+                    evidencia a quién lo solicite, solo necesitas darle al botón
+                    de <b>siguiente</b>, enviarnos tus datos, una fotografía de
+                    tu INE y <b>¡Listo!</b> trámite realizado.
+                  </div>
+                  <div class="message-body" v-if="option == 'SEGUIMIENTO'">
+                    ¡Sí!, así de fácil es solicitar un
+                    <strong>Seguimiento académico</strong>, un documento muy
+                    útil para ver tu progreso escolar, solo dale a
+                    <b>siguiente</b>, completa tus datos faltantes, una foto de
+                    tu INE y <b>¡Listo!</b> trámite realizado.
                   </div>
                 </article>
 
@@ -124,7 +145,7 @@
                           rules="required"
                           name="description"
                           v-slot="{ errors, valid }"
-                          v-if="option == 'IMMS'"
+                          v-if="option == 'IMSS'"
                         >
                           <b-field
                             :message="errors"
@@ -140,12 +161,12 @@
                               v-model="schoolRequest.description"
                               placeholder="Seleccione una opcion"
                             >
-                              <option value="alta_imms">Alta</option>
-                              <option value="baja_imms">Baja</option>
+                              <option value="ALTA_IMSS">Alta</option>
+                              <option value="BAJA_IMSS">Baja</option>
                             </b-select>
                           </b-field>
                         </ValidationProvider>
-                        <template v-if="option == 'IMMS'">
+                        <template v-if="option == 'IMSS'">
                           <b-field label="NSS">
                             <BInputWithValidation
                               rules="required"
@@ -157,7 +178,7 @@
 
                           <b-field
                             label="CURP"
-                            v-if="schoolRequest.description == 'alta_imms'"
+                            v-if="schoolRequest.description == 'ALTA_IMSS'"
                           >
                             <BInputWithValidation
                               rules="required"
@@ -167,7 +188,7 @@
                             />
                           </b-field>
                           <a
-                            v-if="schoolRequest.description == 'alta_imms'"
+                            v-if="schoolRequest.description == 'ALTA_IMSS'"
                             href="https://www.gob.mx/curp/"
                             target="_blank"
                             class="is-12"
@@ -389,6 +410,7 @@ export default {
     optionSelected (step, option) {
       this.activeStep = step
       this.option = option
+      this.$store.commit('SET_TYPE', option)
     },
     async nextStep () {
       let success
