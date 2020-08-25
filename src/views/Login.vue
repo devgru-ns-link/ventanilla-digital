@@ -17,29 +17,29 @@
               </router-link>
             </figure>
             <form>
-              <div class="field">
-                <div class="control">
-                  <input
-                    class="input"
-                    type="text"
-                    placeholder="Matrícula"
-                    v-model="user.enrollment"
-                  />
-                </div>
-              </div>
+              <b-field>
+                <b-input
+                  placeholder="Matricula"
+                  type="text"
+                  icon="account"
+                  required
+                  v-model="user.enrollment"
+                >
+                </b-input>
+              </b-field>
 
-              <div class="field">
-                <div class="control">
-                  <input
-                    class="input"
-                    type="password"
-                    placeholder="Contraseña"
-                    password-reveal
-                    v-model="user.password"
-                    @keyup.enter="submit"
-                  />
-                </div>
-              </div>
+              <b-field>
+                <b-input
+                  required
+                  type="password"
+                  placeholder="Contraseña"
+                  password-reveal
+                  icon="lock"
+                  v-model="user.password"
+                  @keyup.enter="submit"
+                >
+                </b-input>
+              </b-field>
 
               <div class="field">
                 <label class="checkbox">
