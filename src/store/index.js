@@ -49,6 +49,9 @@ export default new Vuex.Store({
     SET_TYPE (state, value) {
       state.schoolRequest.type = value
     },
+    CLEAR_REQ (state) {
+      state.schoolRequest = {}
+    },
   },
   actions: {
     login ({ commit }, data) {
