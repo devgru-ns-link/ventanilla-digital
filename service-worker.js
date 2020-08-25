@@ -1,3 +1,5 @@
+importScripts("/digital-window/precache-manifest.7e610b81bdb6238de6530b982b1cc023.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+
 workbox.setConfig({
   debug: false
 })
@@ -35,3 +37,4 @@ workbox.routing.registerRoute(
     ]
   })
 )
+
