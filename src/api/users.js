@@ -48,7 +48,7 @@ export function getUserInfo (id) {
 export function setStudent (id, data) {
   return request({
     url: `/users/${id}/set_student/`,
-    method: 'POST',
+    method: 'PUT',
     data
   })
 }

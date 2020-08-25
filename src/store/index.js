@@ -32,7 +32,9 @@ export default new Vuex.Store({
     SET_USER (state, value) {
       state.user = value
     },
-    SET_STUDENT (state, value) {
+    SET_STUDENT(state, value) {
+      state.schoolRequest.student = value.uuid
+      state.schoolRequest.user = state.user.id
       state.student = value
     },
     SET_STUDENT_ENROLLMENT (state) {
@@ -103,12 +105,10 @@ export default new Vuex.Store({
     getStudent ({ commit, state }) {
       return new Promise(async (resolve, reject) => {
         try {
-          const data = await getStudentInfo(state.user.enrollment)    
+          const data = await getStudentInfo(state.user.enrollment)
           commit('SET_STUDENT', data)
-          console.log(data)
           resolve()
         } catch (error) {
-          console.log('student', error)
           reject(error)
           commit('SET_STUDENT_ENROLLMENT')
         }
@@ -117,16 +117,14 @@ export default new Vuex.Store({
     getNotification ({ commit, state }) {
       return new Promise(async (resolve, reject) => {
         try {
-          const data = await getNotifications(state.user.id)    
+          const data = await getNotifications(state.user.id)
           commit('SET_NOTIFICATION', data)
-          console.log(data)
           resolve()
         } catch (error) {
-          console.log('notification', error)
           reject(error)
         }
       })
-    },
+    }
   },
   modules: {}
 })

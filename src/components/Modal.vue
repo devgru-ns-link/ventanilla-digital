@@ -78,6 +78,17 @@
                 label="Requisitos"
                 icon="file-document-edit"
               >
+                <article class="message">
+                  <div class="message-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <strong>Pellentesque risus mi</strong>, tempus quis placerat
+                    ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet
+                    fringilla. Nullam gravida purus diam, et dictum
+                    <a>felis venenatis</a> efficitur. Aenean ac
+                    <em>eleifend lacus</em>,
+                  </div>
+                </article>
+
                 <div class="columns">
                   <div class="column is-12">
                     <div>
@@ -102,7 +113,6 @@
                               placeholder="Selecciona un tipo de constancia"
                               v-model="schoolRequest.description"
                             >
-                              <option value>Seleccione una opcion</option>
                               <option value="Normal">Normal</option>
                               <option value="SITUR">SITUR</option>
                               <option value="Promedio">Promedio</option>
@@ -110,61 +120,59 @@
                           </b-field>
                         </ValidationProvider>
 
-                        <template>
-                          <ValidationProvider
-                            rules="required"
-                            name="description"
-                            v-slot="{ errors, valid }"
-                            v-if="option == 'IMMS'"
+                        <ValidationProvider
+                          rules="required"
+                          name="description"
+                          v-slot="{ errors, valid }"
+                          v-if="option == 'IMMS'"
+                        >
+                          <b-field
+                            :message="errors"
+                            :type="{
+                              'is-danger': errors[0],
+                              'is-success': valid
+                            }"
+                            label="Tipo de solicitud"
                           >
-                            <b-field
-                              :message="errors"
-                              :type="{
-                                'is-danger': errors[0],
-                                'is-success': valid
-                              }"
-                              label="Tipo de solicitud"
+                            <b-select
+                              size="is-medium-small"
+                              expanded
+                              v-model="schoolRequest.description"
+                              placeholder="Seleccione una opcion"
                             >
-                              <b-select
-                                size="is-medium-small"
-                                expanded
-                                v-model="schoolRequest.description"
-                                placeholder="Seleccione una opcion"
-                              >
-                                <option value="alta_imms">Alta</option>
-                                <option value="baja_imms">Baja</option>
-                              </b-select>
-                            </b-field>
-                          </ValidationProvider>
-                          <template v-if="option == 'IMMS'">
-                            <b-field label="NSS">
-                              <BInputWithValidation
-                                rules="required"
-                                type="text"
-                                v-model="student.NSS"
-                                placeholder="NSS"
-                              />
-                            </b-field>
+                              <option value="alta_imms">Alta</option>
+                              <option value="baja_imms">Baja</option>
+                            </b-select>
+                          </b-field>
+                        </ValidationProvider>
+                        <template v-if="option == 'IMMS'">
+                          <b-field label="NSS">
+                            <BInputWithValidation
+                              rules="required"
+                              type="text"
+                              v-model="student.NSS"
+                              placeholder="NSS"
+                            />
+                          </b-field>
 
-                            <b-field
-                              label="CURP"
-                              v-if="schoolRequest.description == 'alta_imms'"
-                            >
-                              <BInputWithValidation
-                                rules="required"
-                                v-model="student.CURP"
-                                type="text"
-                                placeholder="CURP"
-                              />
-                            </b-field>
-                            <a
-                              v-if="schoolRequest.description == 'alta_imms'"
-                              href="https://www.gob.mx/curp/"
-                              target="_blank"
-                              class="is-12"
-                              >Consultar CURP</a
-                            >
-                          </template>
+                          <b-field
+                            label="CURP"
+                            v-if="schoolRequest.description == 'alta_imms'"
+                          >
+                            <BInputWithValidation
+                              rules="required"
+                              v-model="student.CURP"
+                              type="text"
+                              placeholder="CURP"
+                            />
+                          </b-field>
+                          <a
+                            v-if="schoolRequest.description == 'alta_imms'"
+                            href="https://www.gob.mx/curp/"
+                            target="_blank"
+                            class="is-12"
+                            >Consultar CURP</a
+                          >
                         </template>
                       </ValidationObserver>
                     </div>
@@ -176,6 +184,7 @@
                   <b-field label="Nombre(s)">
                     <BInputWithValidation
                       rules="required"
+                      name="name"
                       v-model="user.first_name"
                       type="text"
                       placeholder="Nombre(s)"
@@ -186,6 +195,7 @@
                     <BInputWithValidation
                       rules="required"
                       v-model="user.last_name"
+                      name="lastname"
                       type="text"
                       placeholder="Apellidos"
                     />
@@ -399,12 +409,7 @@ export default {
     },
     async submit () {
       let success = await this.$refs.form3.validate()
-      const form_data = new FormData()
       if (!success) return
-      // delete this.schoolRequest.INE
-      for (var key in this.schoolRequest) {
-        form_data.append(key, this.schoolRequest[key])
-      }
       this.$buefy.dialog.confirm({
         title: 'Revisa que los datos sean correctos',
         message: `Trámite solicitado: ` + this.option,
@@ -414,8 +419,15 @@ export default {
         hasIcon: true,
         iconPack: 'fa',
         onConfirm: async () => {
-          await setStudent(this.user.id, this.student)
-          await schoolRequest(this.user.id, form_data)
+          const st = await setStudent(this.user.id, this.student)
+          const form_data = new FormData()
+          this.$store.commit('SET_STUDENT', st)
+          console.log(st)
+          for (var key in this.schoolRequest) {
+            form_data.append(key, this.schoolRequest[key])
+          }
+          const res = await schoolRequest(this.user.id, form_data)
+          console.log(res)
           this.$buefy.toast.open({
             message: '¡Solicitud enviada correctamente!',
             type: 'is-success'
