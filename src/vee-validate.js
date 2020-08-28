@@ -37,3 +37,10 @@ extend('matricula', value => {
     ? true
     : 'La matrícula debe tener el formato E12345678'
 })
+
+extend('ingreso', value => {
+  return value <=12 & value > 0
+
+    ? true
+    : 'Escriba un ingreso válido'
+})

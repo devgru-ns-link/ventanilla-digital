@@ -266,7 +266,7 @@
 
                   <b-field label="Ingreso">
                     <BInputWithValidation
-                      rules="required"
+                      rules="required|ingreso"
                       placeholder="Selecciona tu ingreso"
                       size="is-small-medium"
                       v-model="student.admission"

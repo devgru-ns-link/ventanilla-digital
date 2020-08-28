@@ -25,7 +25,9 @@
                   <li>Matrícula: {{ user.enrollment }}</li>
                   <li v-if="!student.career">Aún no has indicado tu carrera</li>
                   <li v-else>Carrera: {{ student.career }}</li>
-                  <li v-if="!student.admission">Aún no has indicado tu semestre</li>
+                  <li v-if="!student.admission">
+                    Aún no has indicado tu semestre
+                  </li>
                   <li v-else>Ingreso: {{ student.admission }}</li>
                 </ul>
               </div>
@@ -50,47 +52,87 @@
           </p>
         </b-message>
 
+        <b-message type="is-info" has-icon
+          ><p>
+            ¡Tranquilo! se te irá notificando del estatus de tu solicitud,
+            estate pendiente de tus notificaciones y correo.
+          </p>
+        </b-message>
+
         <div class="columns is-centered is-multiline is-mobile">
-          <div v-for="i in 10" :key="i" class="column is-one-quarter-desktop">
+          <div v-for="i in 11" :key="i" class="column is-one-quarter-desktop">
             <div class="card">
               <div class="card-image"></div>
               <header class="card-header">
                 <div class="card-header-title">
-                  <span>
-                    Admin
-                    <small>(Light)</small>
-                  </span>
-                  <span class="is-pulled-right">
-                    <span class="tag is-default">Desktop</span>
-                    <span class="tag is-danger">WIP</span>
-                  </span>
+                  <span> Solicitud No.{{ i }} </span>
                 </div>
               </header>
 
               <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <p class="title is-4">John Smith</p>
-                    <p class="subtitle is-6">@johnsmith</p>
-                  </div>
-                </div>
+                <b-steps
+                  v-model="activeStep"
+                  :animated="isAnimated"
+                  :rounded="isRounded"
+                  :has-navigation="hasNavigation"
+                  :icon-prev="prevIcon"
+                  :icon-next="nextIcon"
+                  :label-position="labelPosition"
+                  :mobile-mode="mobileMode"
+                >
+                  <b-step-item step="1" :clickable="isStepsClickable">
+                    <h1 class="title has-text-centered">Enviada</h1>
+                    <p class="has-text-centered">
+                      Tu solicitud ha sido enviada.
+                    </p>
+                    <br />
+                    <strong>Detalles:</strong>
+                    <br />
+                    <li><b>Trámite:</b> CONSTANCIA</li>
+                    <li><b>Tipo:</b> NORMAL</li>
+                  </b-step-item>
 
-                <div class="content">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Phasellus nec iaculis mauris.
-                  <a>@bulmaio</a>.
-                  <a href="#">#css</a>
-                  <a href="#">#responsive</a>
-                </div>
+                  <b-step-item
+                    step="2"
+                    :clickable="isStepsClickable"
+                    class="has-text-centered"
+                  >
+                    <h1 class="title has-text-centered">En proceso</h1>
+                    <p></p>
+                    Lorem ipsum dolor sit amet.
+                  </b-step-item>
+
+                  <b-step-item
+                    step="3"
+                    :clickable="isStepsClickable"
+                    class="has-text-centered"
+                  >
+                    <h1 class="title has-text-centered">Lista</h1>
+                    <p></p>
+                    Lorem ipsum dolor sit amet.
+                  </b-step-item>
+
+                  <b-step-item
+                    step="4"
+                    :clickable="isStepsClickable"
+                    class="has-text-centered"
+                  >
+                    <h1 class="title has-text-centered">Finalizada</h1>
+                    <p></p>
+                    Lorem ipsum dolor sit amet.
+                  </b-step-item>
+                </b-steps>
               </div>
               <footer class="card-footer">
-                <a href="templates/admin.html" class="card-footer-item"
-                  >Preview</a
+                <a
+                  href="templates/admin.html"
+                  class="card-footer-item button is-primary"
+                  >Cancelar</a
                 >
                 <a
                   href="https://github.com/BulmaTemplates/bulma-templates/blob/master/templates/admin.html"
-                  class="card-footer-item"
-                  >Source Code</a
+                  class="card-footer-item button is-primary"
+                  >Editar</a
                 >
               </footer>
             </div>
@@ -104,6 +146,25 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  data () {
+    return {
+      activeStep: 0,
+
+      showSocial: true,
+      isAnimated: true,
+      isRounded: true,
+      isStepsClickable: true,
+
+      hasNavigation: false,
+      customNavigation: false,
+      isProfileSuccess: false,
+
+      prevIcon: 'chevron-left',
+      nextIcon: 'chevron-right',
+      labelPosition: 'bottom',
+      mobileMode: 'minimalist'
+    }
+  },
   async created () {
     await this.$store.dispatch('getStudent')
   },
