@@ -67,9 +67,9 @@
                     requerida en trámites como becas.
                   </p>
 
-                  <router-link tag="a" to="/register" class="button is-primary">
+                  <a class="button is-primary" @click="show_form(true)">
                     <strong>Solicitar</strong>
-                  </router-link>
+                  </a>
                 </div>
               </div>
             </div>
@@ -92,9 +92,9 @@
                     como evidencia a quién lo solicite.
                   </p>
 
-                  <router-link tag="a" to="/register" class="button is-primary">
+                  <a class="button is-primary" @click="show_form(true)">
                     <strong>Solicitar</strong>
-                  </router-link>
+                  </a>
                 </div>
               </div>
             </div>
@@ -117,9 +117,9 @@
                     escolar.
                   </p>
 
-                  <router-link tag="a" to="/register" class="button is-primary">
+                  <a class="button is-primary" @click="show_form(true)">
                     <strong>Solicitar</strong>
-                  </router-link>
+                  </a>
                 </div>
               </div>
             </div>
@@ -137,6 +137,9 @@ export default {
   methods: {
     getImgUrl (value) {
       return `https://picsum.photos/id/43${value}/1230/500`
+    },
+    show_form (value) {
+      this.$store.commit('SHOW_FORM', value)
     }
   }
 }
