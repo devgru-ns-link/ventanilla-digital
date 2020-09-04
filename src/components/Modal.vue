@@ -366,6 +366,7 @@
                     type="is-primary"
                     @click="submit"
                     size="is-medium"
+                    :loading="isLoading"
                     expanded
                     >¡Terminar y enviar!</b-button
                   >
@@ -416,6 +417,7 @@ export default {
     return {
       file: null,
       activeStep: 0,
+      isLoading: false,
       option: ''
     }
   },
@@ -484,6 +486,7 @@ export default {
         hasIcon: true,
         iconPack: 'fa',
         onConfirm: async () => {
+          this.isLoading = true
           const st = await setStudent(this.user.id, this.student)
           const form_data = new FormData()
           this.$store.commit('SET_STUDENT', st)
@@ -492,7 +495,6 @@ export default {
             form_data.append(key, this.schoolRequest[key])
           }
           const res = await schoolRequest(this.user.id, form_data)
-          console.log(res)
           this.$buefy.toast.open({
             message: '¡Solicitud enviada correctamente!',
             type: 'is-success'
@@ -500,6 +502,7 @@ export default {
           this.$store.commit('CLEAR_REQ')
           this.show_form(false)
           this.activeStep = 0
+          this.isLoading = false
         }
       })
     }
